@@ -1,7 +1,9 @@
 // Importing all required packages
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:on_boarding/category.dart';
 import 'package:on_boarding/main.dart';
+import 'package:on_boarding/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Creating a staless class named OnBoardingPage
@@ -203,7 +205,11 @@ class OnBoardingPage extends StatelessWidget {
                 color: Color(0xFF3E1452),
               ),
             ),
-            onDone: () => onDone(context),
+            // onDone: () => onDone(context),
+            onDone: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: ((context) => const StartScreen())));
+            },
             curve: Curves.bounceOut,
           ),
         ),

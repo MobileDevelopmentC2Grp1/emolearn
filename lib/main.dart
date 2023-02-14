@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:on_boarding/onboarding_page.dart';
+import 'package:on_boarding/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Used to be able to show the 
+// Used to be able to show the
 //onboarding screen only once, that's for the first time
 bool show = true;
 void main() async {
@@ -22,9 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Emolearn',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'Exo Space'
       ),
-      home: show ? OnBoardingPage(): const MyHomePage(),
+      // home: show ? OnBoardingPage(): const MyHomePage(),
+      home: show ? SplashScreen(): MyHomePage(),
     );
   }
 }
