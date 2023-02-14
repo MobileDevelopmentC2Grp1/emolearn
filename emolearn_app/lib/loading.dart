@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:emolearn_app/category.dart';
 import 'package:emolearn_app/start.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -21,7 +22,6 @@ class LoadingScreenState extends State<LoadingScreen> {
   void updateProgress() {
     Timer.periodic(const Duration(milliseconds: 1500), (timer) {
       if (_position == 2) {
-        print('Cancel timer');
         timer.cancel();
       } else {
         setState(() {
@@ -68,10 +68,14 @@ class LoadingScreenState extends State<LoadingScreen> {
                   progressColor: const Color.fromRGBO(62, 20, 82, 1.0),
                   backgroundColor: Colors.white,
                   onAnimationEnd: (() {
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: ((context) => const StartScreen())));
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: ((context) => const StartScreen())));
+                            builder: ((context) => const VegetableCategory())));
                   }),
                 ),
               )),
