@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Emolearn',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'ExoSpace',
+        primaryColor: const Color.fromRGBO(62, 20, 82, 1.0)
       ),
       home: const SplashScreen(),
     );

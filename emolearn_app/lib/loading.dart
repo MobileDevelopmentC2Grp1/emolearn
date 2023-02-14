@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:emolearn_app/start.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -12,19 +13,6 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class LoadingScreenState extends State<LoadingScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   Timer(const Duration(seconds: 2), ((() {
-  //     Navigator.pushReplacement(
-  //         context,
-  //         MaterialPageRoute(
-  //             builder: ((context) => const MyHomePage(title: 'Emolearn'))));
-  //   })));
-  // }
-
-// ---------
   List<String> _statusMessages = ["Loading ...", "Almost there ...", "Done"];
 
   String _status = "Loading ...";
@@ -54,10 +42,11 @@ class LoadingScreenState extends State<LoadingScreen> {
       backgroundColor: const Color.fromRGBO(62, 20, 82, 1.0),
       body: Center(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const Text(
             "Emolearn",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontSize: 40.0),
           ),
           const SizedBox(height: 48.0),
           Padding(
@@ -66,24 +55,30 @@ class LoadingScreenState extends State<LoadingScreen> {
                 height: 20,
                 padding: const EdgeInsets.only(
                     left: 1.5, right: 1.5, top: 1, bottom: 1),
-                // color: Colors.amber,
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(16.0))),
                 child: LinearPercentIndicator(
-                    padding: EdgeInsets.zero,
-                    animation: true,
-                    lineHeight: 16.0,
-                    animationDuration: 3000,
-                    percent: 1.0,
-                    barRadius: const Radius.circular(16),
-                    progressColor: const Color.fromRGBO(62, 20, 82, 1.0),
-                    backgroundColor: Colors.white),
+                  padding: EdgeInsets.zero,
+                  animation: true,
+                  lineHeight: 16.0,
+                  animationDuration: 3000,
+                  percent: 1.0,
+                  barRadius: const Radius.circular(16),
+                  progressColor: const Color.fromRGBO(62, 20, 82, 1.0),
+                  backgroundColor: Colors.white,
+                  onAnimationEnd: (() {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => const StartScreen())));
+                  }),
+                ),
               )),
           const SizedBox(height: 8.0),
           Text(
             _status,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white, fontSize: 12.0),
           ),
         ],
       )),

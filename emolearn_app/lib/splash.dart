@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor:Color.fromRGBO(62, 20, 82, 1.0),
-      body: Center(child: Text("Emolearn", style: TextStyle(color: Colors.white),)),
+      body: Center(child: Text("Emolearn", style: TextStyle(color: Colors.white, fontSize: 40.0))),
     );
   }
 }
