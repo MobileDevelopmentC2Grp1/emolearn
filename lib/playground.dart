@@ -68,7 +68,20 @@ class Playground extends StatelessWidget {
                   ])
             ]),
             const SizedBox(
-              height: 64.0,
+              height: 12.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  'images/emoji.png',
+                  width: 88.0,
+                  height: 24.24,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 40.0,
             ),
             // category 1: fruits
             Stack(clipBehavior: Clip.none, children: [
