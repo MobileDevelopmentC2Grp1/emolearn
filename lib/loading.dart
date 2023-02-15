@@ -13,11 +13,13 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class LoadingScreenState extends State<LoadingScreen> {
+
   final List<String> _statusMessages = ["Loading ...", "Almost there ...", "Done"];
 
   String _status = "Loading ...";
   int _position = 0;
 
+  // function used to update the progress indicator after 1.5s
   void updateProgress() {
     Timer.periodic(const Duration(milliseconds: 1500), (timer) {
       if (_position == 2) {
@@ -57,6 +59,7 @@ class LoadingScreenState extends State<LoadingScreen> {
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                    // progress indicator 
                 child: LinearPercentIndicator(
                   padding: EdgeInsets.zero,
                   animation: true,
@@ -67,10 +70,7 @@ class LoadingScreenState extends State<LoadingScreen> {
                   progressColor: const Color.fromRGBO(62, 20, 82, 1.0),
                   backgroundColor: Colors.white,
                   onAnimationEnd: (() {
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: ((context) => const StartScreen())));
+                    // After loading, the user is redirected to the onboarding page 
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

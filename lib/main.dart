@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/splash.dart';
+import 'package:on_boarding/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Used to be able to show the
@@ -24,8 +25,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Exo Space'
       ),
-      // home: show ? OnBoardingPage(): const MyHomePage(),
-      home: show ? const SplashScreen(): const MyHomePage(),
+      // show the splash screen if it is the user's first time, otherwise redirect to Start screen
+      home: show ? const SplashScreen(): const StartScreen(),
     );
   }
 }

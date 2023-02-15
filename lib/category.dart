@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// user can select the level of difficulty to play from either the fruit or vegetable category
 class FruitCategory extends StatelessWidget {
   const FruitCategory({super.key});
 
@@ -77,6 +78,7 @@ class FruitCategory extends StatelessWidget {
                   const SizedBox(
                     height: 40.0,
                   ),
+                  // Buttons to select the level of difficulty in fruits category
                   OutlinedButton(
                       onPressed: (() {}),
                       style: OutlinedButton.styleFrom(
@@ -237,6 +239,7 @@ class VegetableCategory extends StatelessWidget {
                   const SizedBox(
                     height: 40.0,
                   ),
+                  // Buttons to select the level of difficulty in vegetables category
                   OutlinedButton(
                       onPressed: (() {}),
                       style: OutlinedButton.styleFrom(

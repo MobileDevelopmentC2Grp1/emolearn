@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:on_boarding/category.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
+// user can select category to play
 class Playground extends StatelessWidget {
   const Playground({super.key});
 
@@ -16,9 +17,9 @@ class Playground extends StatelessWidget {
         child: Column(
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              // opens the settings popup (yet to be implemented)
               OutlinedButton(
                   onPressed: () {
-                    Navigator.pop(context);
                   },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -69,6 +70,7 @@ class Playground extends StatelessWidget {
             const SizedBox(
               height: 64.0,
             ),
+            // category 1: fruits
             Stack(clipBehavior: Clip.none, children: [
               // For content and links with slight elevation on the sides
               Container(
@@ -104,6 +106,7 @@ class Playground extends StatelessWidget {
             const SizedBox(
               height: 64.0,
             ),
+             // category 2: vegetables
             Stack(clipBehavior: Clip.none, children: [
               // For content and links with slight elevation on the sides
               Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/playground.dart';
 
+// user has the option to start playing or save their progress by creating an account
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
 
@@ -39,6 +40,7 @@ class StartScreen extends StatelessWidget {
                     Image.asset("images/game-day.png",
                         width: 324.0, height: 350.0)
                   ]),
+                  // if user chooses to play directly, they are directed to the playground
                   TextButton(
                       onPressed: ((() {
                         Navigator.pushReplacement(
@@ -64,6 +66,7 @@ class StartScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24.0,
                   ),
+                  // In later iterations, this button would redirect the user to register/log in
                   TextButton(
                       onPressed: ((() {})),
                       child: Container(
