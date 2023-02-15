@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Exo Space'
       ),
       // home: show ? OnBoardingPage(): const MyHomePage(),
-      home: show ? SplashScreen(): MyHomePage(),
+      home: show ? const SplashScreen(): const MyHomePage(),
     );
   }
 }

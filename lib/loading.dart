@@ -13,7 +13,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class LoadingScreenState extends State<LoadingScreen> {
-  List<String> _statusMessages = ["Loading ...", "Almost there ...", "Done"];
+  final List<String> _statusMessages = ["Loading ...", "Almost there ...", "Done"];
 
   String _status = "Loading ...";
   int _position = 0;

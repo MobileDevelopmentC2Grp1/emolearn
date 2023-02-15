@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:on_boarding/category.dart';
+import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
 class Playground extends StatelessWidget {
   const Playground({super.key});
+
+  final int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +138,33 @@ class Playground extends StatelessWidget {
             ])
           ],
         ),
+      ),
+      bottomNavigationBar: MoltenBottomNavigationBar(
+        barColor: const Color.fromRGBO(62, 20, 82, 1.0),
+        domeHeight: 20.0,
+        domeCircleColor: const Color.fromRGBO(62, 20, 82, 1.0),
+        selectedIndex: _selectedIndex,
+        onTabChange: (clickedIndex) {},
+        tabs: [
+          MoltenTab(
+              icon: const Icon(FontAwesomeIcons.question),
+              title: const Text('Help'),
+              selectedColor: const Color.fromRGBO(140, 214, 92, 1.0),
+              unselectedColor: Colors.white),
+          MoltenTab(
+              icon: const Icon(FontAwesomeIcons.play),
+              title: const Text('Playground',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: Color.fromRGBO(140, 214, 92, 1.0))),
+              selectedColor: const Color.fromRGBO(140, 214, 92, 1.0),
+              unselectedColor: Colors.white),
+          MoltenTab(
+              icon: const Icon(FontAwesomeIcons.solidUser),
+              title: const Text('Profile'),
+              selectedColor: const Color.fromRGBO(140, 214, 92, 1.0),
+              unselectedColor: Colors.white),
+        ],
       ),
     );
   }

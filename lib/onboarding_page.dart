@@ -1,7 +1,6 @@
 // Importing all required packages
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:on_boarding/category.dart';
 import 'package:on_boarding/main.dart';
 import 'package:on_boarding/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
