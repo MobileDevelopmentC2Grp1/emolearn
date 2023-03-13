@@ -48,7 +48,7 @@ class StartScreen extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => const ProfileWithAccount())));
+                                builder: ((context) => const ProfileNoAccount())));
                       })),
                       // onPressed: ((() {
                       //   Navigator.pushReplacement(
