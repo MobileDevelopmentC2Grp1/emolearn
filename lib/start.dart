@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/howtoplay.dart';
+import 'package:on_boarding/main.dart';
 import 'package:on_boarding/playground.dart';
 import 'package:on_boarding/profile.dart';
 
@@ -48,7 +49,7 @@ class StartScreen extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => const ProfileNoAccount())));
+                                builder: ((context) => const MyHomePage())));
                       })),
                       // onPressed: ((() {
                       //   Navigator.pushReplacement(
