@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:on_boarding/howtoplay.dart';
 import 'package:on_boarding/main.dart';
-import 'package:on_boarding/playground.dart';
-import 'package:on_boarding/profile.dart';
 
 // user has the option to start playing or save their progress by creating an account
 class StartScreen extends StatelessWidget {

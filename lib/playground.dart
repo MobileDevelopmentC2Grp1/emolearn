@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:on_boarding/category.dart';
-import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
 // user can select category to play
 class Playground extends StatelessWidget {
