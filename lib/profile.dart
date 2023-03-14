@@ -1,6 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:on_boarding/signup.dart';
+
+class Profile extends StatelessWidget {
+  const Profile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return const ProfileWithAccount();
+        }
+        else {
+          return const ProfileNoAccount();
+        }
+      },
+    );
+  }
+
+}
 
 class ProfileNoAccount extends StatelessWidget {
   const ProfileNoAccount({super.key});
@@ -352,12 +373,9 @@ class ProfileWithAccount extends StatelessWidget {
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset("images/avatar.png", width: 136.0, height: 65.0),
-                  const SizedBox(
-                    width: 4.0,
-                  ),
-                  const Text(
-                    "<Username here>",
-                    style: TextStyle(
+                  Text(
+                    "${FirebaseAuth.instance.currentUser!.displayName}",
+                    style: const TextStyle(
                         fontSize: 20.0, color: Color.fromRGBO(62, 20, 82, 1.0)),
                   ),
                 ]),
@@ -377,10 +395,11 @@ class ProfileWithAccount extends StatelessWidget {
                         width: 16.0,
                       ),
                       Text(
-                        "<Score here>",
+                        "0",
                         style: TextStyle(
                             fontSize: 20.0,
-                            color: Color.fromRGBO(62, 20, 82, 1.0)),
+                            color: Color.fromRGBO(62, 20, 82, 1.0),
+                            textBaseline: TextBaseline.alphabetic),
                       ),
                     ]),
               ],

@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static const List<Widget> _pages = <Widget>[
     HowToPlay(),
     Playground(),
-    ProfileNoAccount()
+    Profile()
   ];
 
   @override
