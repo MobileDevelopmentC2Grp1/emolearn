@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:on_boarding/main.dart';
 import 'package:on_boarding/playground.dart';
 import 'package:on_boarding/utils.dart';
 import 'content_button.dart';
@@ -123,7 +124,8 @@ class _SignupPageState extends State<SignupPage> {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return const Playground();
+                return const MyHomePage();
+                // return const Playground();
               } else {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
