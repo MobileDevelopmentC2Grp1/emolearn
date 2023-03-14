@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ])),
         child: Scaffold(
           appBar: AppBar(
+            elevation: 0.0,
             backgroundColor: const Color.fromRGBO(251, 247, 253, 1),
             actions: [Padding(
               padding: const EdgeInsets.symmetric(

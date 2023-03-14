@@ -46,9 +46,9 @@ class Playground extends StatelessWidget {
         //             ],
         //           )))
         // ]),
-        const SizedBox(
-          height: 8.0,
-        ),
+        // const SizedBox(
+        //   height: 8.0,
+        // ),
         Row(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
             Text("Hey buddy,",

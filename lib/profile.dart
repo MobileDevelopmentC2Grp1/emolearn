@@ -47,9 +47,9 @@ class ProfileNoAccount extends StatelessWidget {
       //                 ],
       //               ))),
       //     ]),
-      const SizedBox(
-        height: 8.0,
-      ),
+      // const SizedBox(
+      //   height: 8.0,
+      // ),
       Card(
         elevation: 2.0,
         color: const Color.fromRGBO(251, 247, 253, 1),

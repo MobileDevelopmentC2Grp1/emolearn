@@ -12,9 +12,9 @@ class HowToPlay extends StatelessWidget {
       //       style: TextStyle(
       //           fontSize: 28.0, color: Color.fromRGBO(62, 20, 82, 1.0)))
       // ]),
-      const SizedBox(
-        height: 8.0,
-      ),
+      // const SizedBox(
+      //   height: 8.0,
+      // ),
       const Text("How to Play:",
           style: TextStyle(
               fontSize: 40.0, color: Color.fromRGBO(62, 20, 82, 1.0))),
