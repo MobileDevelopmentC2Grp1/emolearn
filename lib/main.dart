@@ -1,3 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:on_boarding/howtoplay.dart';
 import 'package:on_boarding/playground.dart';
@@ -11,8 +14,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // Used to be able to show the
 //onboarding screen only once, that's for the first time
 bool show = true;
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final prefs = await SharedPreferences.getInstance();
   show = prefs.getBool('ON_BOARDING') ?? true;
   runApp(const MyApp());
