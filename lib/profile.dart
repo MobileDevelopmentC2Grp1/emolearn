@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:on_boarding/signup.dart';
 
 class ProfileNoAccount extends StatelessWidget {
   const ProfileNoAccount({super.key});
@@ -75,10 +76,10 @@ class ProfileNoAccount extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: ((() {
-                      // Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: ((context) => const ProfileNoAccount())));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => const SignupPage())));
                     })),
                     child: Container(
                         // width: MediaQuery.of(context).size.width,

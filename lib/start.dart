@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/main.dart';
+import 'package:on_boarding/signup.dart';
 
 // user has the option to start playing or save their progress by creating an account
 class StartScreen extends StatelessWidget {
@@ -75,7 +76,13 @@ class StartScreen extends StatelessWidget {
                   ),
                   // In later iterations, this button would redirect the user to register/log in
                   TextButton(
-                      onPressed: ((() {})),
+                      onPressed: ((() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => const SignupPage()))
+                                );
+                      })),
                       child: Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
