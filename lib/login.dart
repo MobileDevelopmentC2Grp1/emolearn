@@ -17,12 +17,12 @@ class _LoginPageState extends State<LoginPage> {
   Future userLogIn() async {}
 
   // inputs controller
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final pwdController = TextEditingController();
 
   @override
   void dispose() {
-    usernameController.dispose();
+    emailController.dispose();
     pwdController.dispose();
     super.dispose();
   }
@@ -31,10 +31,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-            gradient: RadialGradient(colors: [
-          Color.fromRGBO(245, 235, 250, 1.0),
-          Color.fromRGBO(245, 235, 250, 1.0),
-        ])),
+          gradient: RadialGradient(colors: [
+        Color.fromRGBO(245, 235, 250, 1.0),
+        Color.fromRGBO(245, 235, 250, 1.0),
+      ])),
       child: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -91,21 +91,19 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   // Stars image
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Image(
-                        image: AssetImage(
-                          'images/stars.png',
-                        ),
-                        fit: BoxFit.contain,
-                        width: 120.0,
-                        height: 60.0,
+                  const Center(
+                    child: Image(
+                      image: AssetImage(
+                        'images/stars.png',
                       ),
+                      fit: BoxFit.contain,
+                      width: 120.0,
+                      height: 60.0,
                     ),
                   ),
 
-                  //Page descriptionconst SizedBox(height: 20.0),
+                  //Page description
+                  const SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
@@ -123,12 +121,12 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 20),
 
-                  // username
+                  // email
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: const [
                       Text(
-                        'Username',
+                        'Email',
                         style: TextStyle(
                           color: Color(0xFF52143F),
                           fontFamily: 'Exo Space',
@@ -141,8 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 5),
 
                   MytextFields(
-                    controller: usernameController,
-                    hintText: 'Username',
+                    controller: emailController,
+                    hintText: 'example@gmail.com',
                     obsecureText: false,
                   ),
 
@@ -184,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Text(
                     'New here?',
                     style: TextStyle(
-                      color: Color(0xFF7C28A4),
+                      color: Color(0xFF52143F),
                       fontFamily: 'Exo Space',
                       fontSize: 20.0,
                     ),
@@ -203,8 +201,8 @@ class _LoginPageState extends State<LoginPage> {
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(24)),
                         ),
-                        side:
-                            const BorderSide(width: 1, color: Color(0xFF52143F)),
+                        side: const BorderSide(
+                            width: 1, color: Color(0xFF52143F)),
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(

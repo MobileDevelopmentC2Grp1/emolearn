@@ -16,12 +16,14 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   // inputs controller
+  final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final pwdController = TextEditingController();
   final confirmPwdController = TextEditingController();
 
   @override
   void dispose() {
+    emailController.dispose();
     usernameController.dispose();
     pwdController.dispose();
     confirmPwdController.dispose();
@@ -94,17 +96,14 @@ class _SignupPageState extends State<SignupPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   // Stars image
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Image(
-                        image: AssetImage(
-                          'images/stars.png',
-                        ),
-                        fit: BoxFit.contain,
-                        width: 120.0,
-                        height: 60.0,
+                  const Center(
+                    child: Image(
+                      image: AssetImage(
+                        'images/stars.png',
                       ),
+                      fit: BoxFit.contain,
+                      width: 120.0,
+                      height: 60.0,
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -125,6 +124,30 @@ class _SignupPageState extends State<SignupPage> {
                   ),
 
                   const SizedBox(height: 20),
+                  // Email
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Email',
+                        style: TextStyle(
+                          color: Color(0xFF52143F),
+                          fontFamily: 'Exo Space',
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  MytextFields(
+                    controller: usernameController,
+                    hintText: 'example@gmail.com',
+                    obsecureText: false,
+                  ),
+
+                  const SizedBox(height: 15),
 
                   // username
                   Row(
@@ -145,7 +168,7 @@ class _SignupPageState extends State<SignupPage> {
 
                   MytextFields(
                     controller: usernameController,
-                    hintText: 'Username',
+                    hintText: 'Dwayne Johnson',
                     obsecureText: false,
                   ),
 
@@ -212,7 +235,7 @@ class _SignupPageState extends State<SignupPage> {
                   const Text(
                     'Already a member?',
                     style: TextStyle(
-                      color: Color(0xFF7C28A4),
+                      color: Color(0xFF52143F),
                       fontFamily: 'Exo Space',
                       fontSize: 20.0,
                     ),
