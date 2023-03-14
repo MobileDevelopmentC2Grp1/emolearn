@@ -15,9 +15,10 @@ class FruitCategory extends StatelessWidget {
         ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Padding(
+            body: SingleChildScrollView(
+                child: Padding(
               padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 32.0),
               child: Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -66,7 +67,8 @@ class FruitCategory extends StatelessWidget {
                     height: 24.0,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Image.asset("images/fruits_large.png", width: 272, height: 143.52)
+                    Image.asset("images/fruits_large.png",
+                        width: 272, height: 143.52)
                   ]),
                   const SizedBox(
                     height: 24.0,
@@ -158,7 +160,7 @@ class FruitCategory extends StatelessWidget {
                           ))),
                 ],
               ),
-            )));
+            ))));
   }
 }
 
@@ -175,9 +177,10 @@ class VegetableCategory extends StatelessWidget {
         ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Padding(
+            body: SingleChildScrollView(
+                child: Padding(
               padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 32.0),
               child: Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -317,6 +320,6 @@ class VegetableCategory extends StatelessWidget {
                           ))),
                 ],
               ),
-            )));
+            ))));
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:on_boarding/playground.dart';
+import 'package:on_boarding/main.dart';
 
 // user has the option to start playing or save their progress by creating an account
 class StartScreen extends StatelessWidget {
@@ -15,9 +15,10 @@ class StartScreen extends StatelessWidget {
         ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Padding(
+            body: SingleChildScrollView(
+              child: Padding(
               padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 32.0),
               child: Column(
                 children: [
                   Row(
@@ -46,8 +47,14 @@ class StartScreen extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => const Playground())));
+                                builder: ((context) => const MyHomePage())));
                       })),
+                      // onPressed: ((() {
+                      //   Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: ((context) => const Playground())));
+                      // })),
                       child: Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
@@ -86,6 +93,6 @@ class StartScreen extends StatelessWidget {
                               ))))
                 ],
               ),
-            )));
+            ))));
   }
 }
