@@ -17,10 +17,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   // user log in method
   Future userLogIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: pwdController.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: pwdController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 
   // inputs controller
@@ -95,156 +99,154 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return const MyHomePage();
-              }
-              else
-              {
+              } else {
                 return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      // Stars image
-                      const Center(
-                        child: Image(
-                          image: AssetImage(
-                            'images/stars.png',
+                  padding: const EdgeInsets.all(16.0),
+                  child: SafeArea(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          // Stars image
+                          const Center(
+                            child: Image(
+                              image: AssetImage(
+                                'images/stars.png',
+                              ),
+                              fit: BoxFit.contain,
+                              width: 120.0,
+                              height: 60.0,
+                            ),
                           ),
-                          fit: BoxFit.contain,
-                          width: 120.0,
-                          height: 60.0,
-                        ),
-                      ),
-        
-                      //Page description
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            "Create an account to track your performance",
-                            textAlign: TextAlign.start,
+
+                          //Page description
+                          const SizedBox(height: 20.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "Create an account to track your performance",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Color(0xFF52143F),
+                                  fontFamily: 'Exo Space',
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 20),
+
+                          // email
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Email',
+                                style: TextStyle(
+                                  color: Color(0xFF52143F),
+                                  fontFamily: 'Exo Space',
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 5),
+
+                          MytextFields(
+                            controller: emailController,
+                            hintText: 'example@gmail.com',
+                            obsecureText: false,
+                          ),
+
+                          const SizedBox(height: 15),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Password',
+                                style: TextStyle(
+                                  color: Color(0xFF52143F),
+                                  fontFamily: 'Exo Space',
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 5),
+
+                          //password
+                          MytextFields(
+                            controller: pwdController,
+                            hintText: '***********',
+                            obsecureText: true,
+                          ),
+
+                          const SizedBox(height: 25),
+
+                          //sign in button
+                          LoginButton(
+                            onTap: userLogIn,
+                          ),
+
+                          const SizedBox(height: 10.0),
+
+                          // ----------- New here ----------
+                          const Text(
+                            'New here?',
                             style: TextStyle(
                               color: Color(0xFF52143F),
                               fontFamily: 'Exo Space',
                               fontSize: 20.0,
                             ),
                           ),
-                        ],
-                      ),
-        
-                      const SizedBox(height: 20),
-        
-                      // email
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Email',
-                            style: TextStyle(
-                              color: Color(0xFF52143F),
-                              fontFamily: 'Exo Space',
-                              fontSize: 20.0,
-                            ),
+
+                          const SizedBox(
+                            height: 15.0,
+                          ),
+
+                          // sign up button
+
+                          OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: const Color(0xFF52143F),
+                                minimumSize: const Size.fromHeight(59),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(24)),
+                                ),
+                                side: const BorderSide(
+                                    width: 1, color: Color(0xFF52143F)),
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            const SignupPage())));
+                              },
+                              child: const Text(
+                                'Sign up',
+                                style: TextStyle(
+                                  color: Color(0xFF2C2C3A),
+                                  fontFamily: 'Exo Space',
+                                  fontSize: 24.0,
+                                ),
+                              )),
+                          const SizedBox(
+                            height: 15.0,
                           ),
                         ],
                       ),
-        
-                      const SizedBox(height: 5),
-        
-                      MytextFields(
-                        controller: emailController,
-                        hintText: 'example@gmail.com',
-                        obsecureText: false,
-                      ),
-        
-                      const SizedBox(height: 15),
-        
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Password',
-                            style: TextStyle(
-                              color: Color(0xFF52143F),
-                              fontFamily: 'Exo Space',
-                              fontSize: 20.0,
-                            ),
-                          ),
-                        ],
-                      ),
-        
-                      const SizedBox(height: 5),
-        
-                      //password
-                      MytextFields(
-                        controller: pwdController,
-                        hintText: '***********',
-                        obsecureText: true,
-                      ),
-        
-                      const SizedBox(height: 25),
-        
-                      //sign in button
-                      LoginButton(
-                        onTap: userLogIn,
-                      ),
-        
-                      const SizedBox(height: 10.0),
-        
-                      // ----------- New here ----------
-                      const Text(
-                        'New here?',
-                        style: TextStyle(
-                          color: Color(0xFF52143F),
-                          fontFamily: 'Exo Space',
-                          fontSize: 20.0,
-                        ),
-                      ),
-        
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-        
-                      // sign up button
-        
-                      OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: const Color(0xFF52143F),
-                            minimumSize: const Size.fromHeight(59),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(24)),
-                            ),
-                            side: const BorderSide(
-                                width: 1, color: Color(0xFF52143F)),
-                          ),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => const SignupPage())));
-                          },
-                          child: const Text(
-                            'Sign up',
-                            style: TextStyle(
-                              color: Color(0xFF2C2C3A),
-                              fontFamily: 'Exo Space',
-                              fontSize: 24.0,
-                            ),
-                          )),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          
+                );
               }
-            }
-            ),
+            }),
       ),
     );
   }
