@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:on_boarding/gamelevel.dart';
 
 // user can select the level of difficulty to play from either the fruit or vegetable category
 class FruitCategory extends StatelessWidget {
@@ -15,9 +16,10 @@ class FruitCategory extends StatelessWidget {
         ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Padding(
-              padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+            body: SingleChildScrollView(
+                child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 16.0, right: 16.0, top: 32.0, bottom: 32.0),
               child: Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -66,12 +68,13 @@ class FruitCategory extends StatelessWidget {
                     height: 24.0,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Image.asset("images/fruits_large.png", width: 272, height: 143.52)
+                    Image.asset("images/fruits_large.png",
+                        width: 272, height: 143.52)
                   ]),
                   const SizedBox(
                     height: 24.0,
                   ),
-                  const Text("Select Difficulty",
+                  const Text("Select Difficulty", 
                       style: TextStyle(
                           fontSize: 28.0,
                           color: Color.fromRGBO(62, 20, 82, 1.0))),
@@ -80,7 +83,13 @@ class FruitCategory extends StatelessWidget {
                   ),
                   // Buttons to select the level of difficulty in fruits category
                   OutlinedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameLevel(level: 1)));
+                      }),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
@@ -107,7 +116,11 @@ class FruitCategory extends StatelessWidget {
                   ),
                   OutlinedButton(
                       onPressed: (() {
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameLevel(level: 2)));
                       }),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -134,7 +147,13 @@ class FruitCategory extends StatelessWidget {
                     height: 24.0,
                   ),
                   OutlinedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameLevel(level: 3)));
+                      }),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
@@ -158,7 +177,7 @@ class FruitCategory extends StatelessWidget {
                           ))),
                 ],
               ),
-            )));
+            ))));
   }
 }
 
@@ -175,9 +194,10 @@ class VegetableCategory extends StatelessWidget {
         ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Padding(
-              padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+            body: SingleChildScrollView(
+                child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 16.0, right: 16.0, top: 32.0, bottom: 32.0),
               child: Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -317,6 +337,6 @@ class VegetableCategory extends StatelessWidget {
                           ))),
                 ],
               ),
-            )));
+            ))));
   }
 }
