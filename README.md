@@ -1,8 +1,12 @@
-# Emolearn Application 
-#### Emojis with a twist
+# MiniProject2_Cohort2_Group1
+#### Emolearn Application
+##### Emojis with a twist
 
 An educational game for young children
-
+## Team members:
+- Marie Ishimwe
+- Natley Nyamukondiwa
+- Nicole Moyo
 ## Resources used:
 ### Firebase configuration
 
