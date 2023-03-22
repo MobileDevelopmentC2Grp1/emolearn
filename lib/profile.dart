@@ -1,10 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:on_boarding/login_button.dart';
 import 'package:on_boarding/signup.dart';
+import 'package:on_boarding/start.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
@@ -159,6 +167,14 @@ class ProfileNoAccount extends StatelessWidget {
 class ProfileWithAccount extends StatelessWidget {
   const ProfileWithAccount({super.key});
 
+  Future signingOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -256,6 +272,8 @@ class ProfileWithAccount extends StatelessWidget {
                 TextButton(
                     onPressed: ((() {
                       // add logout logic here
+                      signingOut();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const StartScreen()));
                     })),
                     child: Container(
                         // width: MediaQuery.of(context).size.width,

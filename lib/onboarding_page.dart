@@ -11,12 +11,18 @@ class OnBoardingPage extends StatefulWidget {
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
   int currentIndex = 0;
-  final PageController _controller = PageController(initialPage: 0);
+  late PageController _controller;
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _controller = PageController(initialPage: 0);
+    super.initState();
   }
 
   @override
@@ -50,21 +56,23 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               child: PageView.builder(
                 controller: _controller,
                 itemCount: contents.length,
-                onPageChanged: (int index) {
-                  currentIndex = index;
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
                 },
-                itemBuilder: (_, i) {
+                itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(left:16.0, right: 16.0),
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                     child: Column(
                       children: <Widget>[
                         Image.asset(
-                          contents[i].image,
+                          contents[index].image,
                           height: 265,
                         ),
                         const SizedBox(height: 15),
                         Text(
-                          contents[i].title,
+                          contents[index].title,
                           style: const TextStyle(
                             fontSize: 40.0,
                             fontFamily: 'Exo Space',
@@ -76,7 +84,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           padding: const EdgeInsets.only(
                               left: 30.0, right: 30.0, top: 10.0),
                           child: Text(
-                            contents[i].description,
+                            contents[index].description,
                             textAlign: TextAlign.justify,
                             style: const TextStyle(
                               fontSize: 24.0,
