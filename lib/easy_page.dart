@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/main.dart';
+import 'dialogs.dart';
 import 'easy_ans.dart';
 import 'easy_qn.dart';
 
-class EasyPage extends StatelessWidget {
+class EasyPage extends StatefulWidget {
   const EasyPage({super.key, required this.easyList});
   final EasyQuestion easyList;
 
+  @override
+  State<EasyPage> createState() => _EasyPageState();
+}
+
+class _EasyPageState extends State<EasyPage> {
+  final HelpDialogs easyDialog = HelpDialogs();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +29,13 @@ class EasyPage extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      easyDialog.DialogBox(
+                        'EASY - Fill in the missing letters in the sequence given below to form the object in the picture.',
+                        'images/easy_help.png',
+                        context);
+                      // print(model.description);
+                    },
                     child: Ink.image(
                       image: const AssetImage('images/info_icon.png'),
                       width: 38,
@@ -60,14 +73,14 @@ class EasyPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(32, 32, 32, 32),
             child: Column(children: [
               Text(
-                easyList.question,
+                widget.easyList.question,
                 style: const TextStyle(
                     fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
               ),
               const SizedBox(
                 height: 32.0,
               ),
-              Image.asset(easyList.imageUrl, height: 150, width: 158.82)
+              Image.asset(widget.easyList.imageUrl, height: 150, width: 158.82)
             ]),
           ),
         ),

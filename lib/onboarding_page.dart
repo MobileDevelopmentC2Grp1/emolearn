@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/start.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'content_model.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -25,13 +26,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     super.initState();
   }
 
+  _onboardingInfo() async {
+    bool show = false;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('ON_BOARDING', show);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
           gradient: RadialGradient(colors: [
         Color.fromRGBO(245, 235, 250, 1.0),
-        Color.fromRGBO(245, 235, 250, 1.0),
+        Color.fromRGBO(235, 214, 245, 1.0),
       ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -56,6 +63,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               child: PageView.builder(
                 controller: _controller,
                 itemCount: contents.length,
+                physics: const NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
                   setState(() {
                     currentIndex = index;
@@ -68,7 +76,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       children: <Widget>[
                         Image.asset(
                           contents[index].image,
-                          height: 265,
+                          height: 270,
                         ),
                         const SizedBox(height: 15),
                         Text(
@@ -113,8 +121,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               margin: const EdgeInsets.all(20),
               width: double.infinity,
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
                   if (currentIndex == contents.length - 1) {
+                    await _onboardingInfo();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:on_boarding/login_button.dart';
 import 'package:on_boarding/signup.dart';
 import 'package:on_boarding/start.dart';
+
+//Link to privacy policy
+final Uri _url = Uri.parse('https://docs.google.com/document/d/1PKbKpqLnXx61Bt-OPL15Q7dgB9uSVd__R3C5t1njIig/edit?usp=sharing');
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -13,7 +17,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -32,6 +35,11 @@ class _ProfileState extends State<Profile> {
 class ProfileNoAccount extends StatelessWidget {
   const ProfileNoAccount({super.key});
 
+  Future<void> _launchUrl() async {
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -127,7 +135,7 @@ class ProfileNoAccount extends StatelessWidget {
                   height: 64.0,
                 ),
                 OutlinedButton(
-                    onPressed: () {},
+                    onPressed: _launchUrl,
                     style: OutlinedButton.styleFrom(
                         fixedSize: const Size.fromWidth(310.0),
                         shape: RoundedRectangleBorder(
@@ -273,7 +281,10 @@ class ProfileWithAccount extends StatelessWidget {
                     onPressed: ((() {
                       // add logout logic here
                       signingOut();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const StartScreen()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StartScreen()));
                     })),
                     child: Container(
                         // width: MediaQuery.of(context).size.width,

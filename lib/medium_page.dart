@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'dialogs.dart';
 import 'medium_qn.dart';
 
-class MediumPage extends StatelessWidget {
+class MediumPage extends StatefulWidget {
   const MediumPage({super.key, required this.mediumList});
   final List<MediumQuestion> mediumList;
 
+  @override
+  State<MediumPage> createState() => _MediumPageState();
+}
+
+class _MediumPageState extends State<MediumPage> {
+  final HelpDialogs mediumDialog = HelpDialogs();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +27,13 @@ class MediumPage extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      mediumDialog.DialogBox(
+                        'MEDIUM - Choose the correct word that accurately matches the word created by combining the emojis from the list below.',
+                        'images/medium_help.png',
+                        context
+                        );
+                    },
                     child: Ink.image(
                       image: const AssetImage('images/info_icon.png'),
                       width: 38,
@@ -57,11 +70,12 @@ class MediumPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
             child: Column(children: [
               Text(
-                mediumList[0].question,
+                widget.mediumList[0].question,
                 style: const TextStyle(
                     fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
               ),
-              Image.asset(mediumList[0].imageUrl, height: 200, width: 200)
+              Image.asset(widget.mediumList[0].imageUrl,
+                  height: 200, width: 200)
             ]),
           ),
         ),

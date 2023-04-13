@@ -15,7 +15,7 @@ List<OnboardingContent> contents = [
         "It's an emoji- based puzzle game that aims to help kids in their early primary develop memory skills.",
   ),
   OnboardingContent(
-    image: 'assets/images/3.png',
+    image: 'assets/images/2.png',
     title: 'What are Emojis?',
     description:
         'An emoji is a visual representation of an emotion, object, or symbol',

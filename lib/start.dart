@@ -12,7 +12,7 @@ class StartScreen extends StatelessWidget {
         decoration: const BoxDecoration(
             gradient: RadialGradient(colors: [
           Color.fromRGBO(245, 235, 250, 1.0),
-          Color.fromRGBO(245, 235, 250, 1.0),
+          Color.fromRGBO(235, 214, 245, 1.0),
         ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,

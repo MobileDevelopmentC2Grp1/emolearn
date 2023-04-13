@@ -1,14 +1,21 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'dialogs.dart';
 import 'hard_qn.dart';
 
-class HardPage extends StatelessWidget {
-  HardPage({super.key, required this.hardList});
-  // Create a text controller  to retrieve the value
-  final _textController = TextEditingController();
+class HardPage extends StatefulWidget {
+  const HardPage({super.key, required this.hardList});
   final HardQuestion hardList;
 
+  @override
+  State<HardPage> createState() => _HardPageState();
+}
+
+class _HardPageState extends State<HardPage> {
+  // Create a text controller  to retrieve the value
+  final _textController = TextEditingController();
+  final HelpDialogs hardDialog = HelpDialogs();
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -23,7 +30,13 @@ class HardPage extends StatelessWidget {
           Row(
             children: [
               InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    hardDialog.DialogBox(
+                      'HARD - Write your answer accurately matches the word formed by combining the emojis.', 
+                      'images/hard_help.png', 
+                      context
+                      );
+                  },
                   child: Ink.image(
                     image: const AssetImage('images/info_icon.png'),
                     width: 38,
@@ -60,12 +73,12 @@ class HardPage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
           child: Column(children: [
             Text(
-              hardList.question,
+              widget.hardList.question,
               style: const TextStyle(
                   fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
             ),
             Image.asset(
-              hardList.imageUrl,
+              widget.hardList.imageUrl,
               width: 200.0,
               height: 200.0,
             )
