@@ -4,20 +4,26 @@ class EasyQuestion {
   final String imageUrl;
   final String answer;
 
-  EasyQuestion({required this.question, required this.imageUrl,
+  EasyQuestion({
+    required this.question,
+    required this.imageUrl,
     required this.answer,
   });
 }
 
-final List<EasyQuestion> easyList = [
-  EasyQuestion(question: "What fruit is this?", imageUrl: "images/grapes.png", answer: "grapes"
-  ),
+List<EasyQuestion> easyList = [
+  //ADD questions and answer here
+
   EasyQuestion(
-      question: "What fruit is this?", imageUrl: "images/orange.png",
-      answer: "orange"
-      ),
+      question: "What fruit is this?",
+      imageUrl: "images/grapes.png",
+      answer: "GRAPES"),
   EasyQuestion(
-      question: "What fruit is this?", imageUrl: "images/pear.png",
-      answer: "pear"
-      ),
+      question: "What fruit is this?",
+      imageUrl: "images/orange.png",
+      answer: "ORANGE"),
+  EasyQuestion(
+      question: "What fruit is this?",
+      imageUrl: "images/pear.png",
+      answer: "PEAR"),
 ];

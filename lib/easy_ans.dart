@@ -28,7 +28,7 @@ class _WordGameState extends State<WordGame> {
     // randomly choose a letter to be missing
     int missingIndex = Random().nextInt(currentWord!.length);
     missingLetter = currentWord![missingIndex];
-    currentWord = currentWord!.replaceFirst(missingLetter!, '_');
+    currentWord = currentWord!.replaceFirst(missingLetter!, '◻');
   }
 
   void checkGuess() {

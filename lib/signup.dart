@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
         User? user = result.user;
         user?.updateDisplayName(usernameController.text.trim());
       } on FirebaseAuthException catch (e) {
-        print(e);
+        //print(e);
         _errorHandling.DialogBox(e.message.toString(), context);
         emailController.clear();
         usernameController.clear();

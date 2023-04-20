@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'medium_page.dart';
-import 'medium_qn.dart';
+
 import 'easy_page.dart';
 import 'hard_page.dart';
-import 'hard_qn.dart';
-import 'easy_qn.dart';
+
+
 
 class GameLevel extends StatelessWidget {
   const GameLevel({super.key, required this.level});
@@ -41,11 +41,11 @@ class GameLevel extends StatelessWidget {
 
   getGameLevel(int no) {
     if (no == 1) {
-      return EasyPage(easyList: easyList[0]);
+      return const EasyPage();
     } else if (no == 2) {
-      return MediumPage(mediumList: mediumList);
+      return const MediumPage();
     } else if (no == 3) {
-      return HardPage(hardList: hardList[0]);
+      return const HardPage();
     }
   }
 }

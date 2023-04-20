@@ -107,13 +107,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 },
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  contents.length,
-                  (index) => BuildDots(index, context),
-                ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                contents.length,
+                (index) => BuildDots(index, context),
               ),
             ),
             Container(

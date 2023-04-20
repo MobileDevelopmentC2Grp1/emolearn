@@ -54,7 +54,7 @@ class _LogInState extends State<LogIn> {
         password: pwdController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      //print(e.message);
       errorHandling.DialogBox(e.message.toString(), context);
       emailController.clear();
       pwdController.clear();
