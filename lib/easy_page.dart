@@ -4,6 +4,7 @@ import 'dialogs.dart';
 import 'easy_qn.dart';
 import 'dart:math';
 import 'dart:ui';
+import 'dart:async';
 
 class EasyPage extends StatefulWidget {
   const EasyPage({super.key});
@@ -26,7 +27,7 @@ class _EasyPageState extends State<EasyPage> {
 
   int easyIndex = 0;
   int easyScore = 0;
-  //bool easyquizFinished = false;
+  bool isFirstPopupVisible = false;
 
   @override
   void initState() {
@@ -110,11 +111,12 @@ class _EasyPageState extends State<EasyPage> {
               height: 200.0,
             ),
             Text(
-              textAlign:TextAlign.center,
+              textAlign: TextAlign.center,
               "Hint:\n$currentWord",
               style: const TextStyle(
-                letterSpacing: 4,
-                  fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+                  letterSpacing: 4,
+                  fontSize: 24,
+                  color: Color.fromARGB(255, 60, 5, 70)),
             ),
           ]),
         ),
@@ -131,6 +133,7 @@ class _EasyPageState extends State<EasyPage> {
               // height: 16.0,
               // ),
               TextFormField(
+                maxLength: 1,
                 controller: easytextController,
                 cursorColor: const Color(0XFF8CD65C),
                 decoration: InputDecoration(
@@ -199,12 +202,19 @@ class _EasyPageState extends State<EasyPage> {
           shape: const StadiumBorder(),
           backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
         ),
-        onPressed: () {
+        onPressed: () async {
           final validated = formKey.currentState!.validate();
           if (!validated) return;
+
           if (isEasyLastQuestion) {
             //display score
-            checkEasyAnswer();
+
+            setState(() {
+              checkEasyAnswer();
+            });
+            await Future.delayed(const Duration(seconds: 3));
+
+            // ignore: use_build_context_synchronously
             showDialog(context: context, builder: (_) => showEasyScoreDialog());
           } else {
             // show dialogue here(whether answer is wrong or correct)
@@ -273,7 +283,7 @@ class _EasyPageState extends State<EasyPage> {
                       easyIndex = 0;
                       easyScore = 0;
                       //easyquizFinished = false;
-                      //generateWord();
+                      generateWord();
                       easytextController.clear();
                     });
                   },

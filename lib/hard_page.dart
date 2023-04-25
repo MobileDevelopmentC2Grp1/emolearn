@@ -156,12 +156,17 @@ class _HardPageState extends State<HardPage> {
           shape: const StadiumBorder(),
           backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
         ),
-        onPressed: () {
+        onPressed: () async {
           final validated = formKey.currentState!.validate();
           if (!validated) return;
           if (isLastHardQuestion) {
             //display score
-            checkHardAnswer();
+            setState(() {
+              checkHardAnswer();
+            });
+            await Future.delayed(const Duration(seconds: 3));
+
+            // ignore: use_build_context_synchronously
             showDialog(context: context, builder: (_) => showHardScoreDialog());
           } else {
             //next question
@@ -170,7 +175,6 @@ class _HardPageState extends State<HardPage> {
               _textController.clear();
 
               index++;
-
             });
           }
         },
@@ -184,17 +188,13 @@ class _HardPageState extends State<HardPage> {
   checkHardAnswer() {
     String answer = _textController.text.trim();
     if (answer.toLowerCase() == hardList[index].answer) {
-    
       hardScore++;
       correctAnswerDialogs.DialogBox('You are correct', context);
-
     } else {
       wrongAnswerDialog.DialogBox(
           'The correct answer is: ${hardList[index].answer}', context);
     }
   }
-
-
 
   showHardScoreDialog() {
     return AlertDialog(
@@ -256,6 +256,5 @@ class _HardPageState extends State<HardPage> {
             )
           ]),
         ));
-  
   }
 }

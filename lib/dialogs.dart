@@ -72,10 +72,16 @@ class HelpDialogs {
 }
 
 class WrongAnswerDialogs {
-  Future<void> DialogBox(String message, BuildContext context) async =>
+  Future<void> DialogBox(
+    String message,
+    BuildContext context,
+  ) async =>
       showDialog(
           context: context,
           builder: (BuildContext context) {
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.of(context).pop();
+            });
             return AlertDialog(
               shape: const RoundedRectangleBorder(
                 side: BorderSide(
@@ -121,6 +127,7 @@ class WrongAnswerDialogs {
                   ),
                 ),
               ),
+/*
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0, bottom: 10),
@@ -161,7 +168,7 @@ class WrongAnswerDialogs {
                         )),
                   ),
                 ),
-              ],
+              ],*/
             );
           });
 }
@@ -171,6 +178,9 @@ class CorrectAnswerDialogs {
       showDialog(
           context: context,
           builder: (BuildContext context) {
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.of(context).pop();
+            });
             return AlertDialog(
               shape: const RoundedRectangleBorder(
                 side: BorderSide(
@@ -210,6 +220,7 @@ class CorrectAnswerDialogs {
                   ),
                 ),
               ),
+              /*
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0, bottom: 10),
@@ -250,10 +261,11 @@ class CorrectAnswerDialogs {
                         )),
                   ),
                 ),
-              ],
+              ],*/
             );
           });
 }
+
 class ShowScoreDialogs {
   Future<void> DialogBox(String message, BuildContext context) async =>
       showDialog(
@@ -304,6 +316,7 @@ class ShowScoreDialogs {
                   ),
                 ),
               ),
+/*
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0, bottom: 10),
@@ -341,12 +354,10 @@ class ShowScoreDialogs {
                                   color: Color.fromRGBO(62, 20, 82, 1.0),
                                 )),
                           ],
-                        )
-                        ),
+                        )),
                   ),
                 ),
-              ],
+              ],*/
             );
           });
 }
-
