@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpDialogs {
   Future<void> DialogBox(
@@ -21,31 +22,41 @@ class HelpDialogs {
               elevation: 1.0,
               title: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Column(
                   children: [
-                    const Text(
-                      'How to play:',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0XFF3E1452),
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Ink.image(
+                              image:
+                                  const AssetImage('images/window-close.png'),
+                              width: 24,
+                              height: 24,
+                            ))
+                      ],
                     ),
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Ink.image(
-                          image: const AssetImage('images/window-close.png'),
-                          width: 24,
-                          height: 24,
-                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'How to play',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0XFF3E1452),
+                            fontSize: 24,
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
               content: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -63,7 +74,7 @@ class HelpDialogs {
                   ),
                   Image.asset(
                     imageUrl,
-                    height: 380,
+                    height: 300,
                   ),
                 ],
               ),
@@ -360,4 +371,101 @@ class ShowScoreDialogs {
               ],*/
             );
           });
+}
+
+class SettingsDialog {
+//Link to privacy policy
+  final Uri _url = Uri.parse(
+      'https://docs.google.com/document/d/1PKbKpqLnXx61Bt-OPL15Q7dgB9uSVd__R3C5t1njIig/edit?usp=sharing');
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  Future<void> DialogBox(BuildContext context) async => showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color(
+                0XFF3E1452,
+              ),
+              width: 2.0,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+          backgroundColor: const Color.fromRGBO(235, 214, 245, 1.0),
+          elevation: 1.0,
+          title: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Ink.image(
+                          image: const AssetImage('images/window-close.png'),
+                          width: 24,
+                          height: 24,
+                        ))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Settings',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0XFF3E1452),
+                        fontSize: 32,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                      onTap: _launchUrl,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
+                            "Privacy policy",
+                            style: TextStyle(
+                                fontSize: 24.0,
+                                color: Color.fromRGBO(62, 20, 82, 1.0)),
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(bottom: 2.0),
+                              child: Icon(
+                                FontAwesomeIcons.angleRight,
+                                color: Color.fromRGBO(62, 20, 82, 1.0),
+                                size: 18.0,
+                              )),
+                        ],
+                      ))
+                ],
+              )
+            ],
+          ),
+        );
+      });
 }

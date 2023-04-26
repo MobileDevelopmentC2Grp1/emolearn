@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:on_boarding/dialogs.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:on_boarding/howtoplay.dart';
@@ -56,6 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Profile()
   ];
 
+  final SettingsDialog settingsDialog = SettingsDialog();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,7 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
                   child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        settingsDialog.DialogBox(context);
+                      },
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
