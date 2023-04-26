@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:on_boarding/notification_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpDialogs {
@@ -436,6 +437,10 @@ class SettingsDialog {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [NotificationSwitch()],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
