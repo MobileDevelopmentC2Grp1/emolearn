@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class HelpDialogs {
   Future<void> DialogBox(
@@ -127,48 +127,7 @@ class WrongAnswerDialogs {
                   ),
                 ),
               ),
-/*
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0, bottom: 10),
-                  child: SizedBox(
-                    width: 180,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF52143F),
-                          minimumSize: const Size.fromHeight(52),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(24)),
-                          ),
-                          side: const BorderSide(
-                              width: 1, color: Color(0xFF52143F)),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "Next ",
-                              style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: Color.fromRGBO(62, 20, 82, 1.0)),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 2.0),
-                                child: Icon(
-                                  FontAwesomeIcons.circleArrowRight,
-                                  color: Color.fromRGBO(62, 20, 82, 1.0),
-                                )),
-                          ],
-                        )),
-                  ),
-                ),
-              ],*/
+
             );
           });
 }
@@ -220,62 +179,25 @@ class CorrectAnswerDialogs {
                   ),
                 ),
               ),
-              /*
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0, bottom: 10),
-                  child: SizedBox(
-                    width: 180,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF52143F),
-                          minimumSize: const Size.fromHeight(52),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(24)),
-                          ),
-                          side: const BorderSide(
-                              width: 1, color: Color(0xFF52143F)),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "Next ",
-                              style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: Color.fromRGBO(62, 20, 82, 1.0)),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 2.0),
-                                child: Icon(
-                                  FontAwesomeIcons.circleArrowRight,
-                                  color: Color.fromRGBO(62, 20, 82, 1.0),
-                                )),
-                          ],
-                        )),
-                  ),
-                ),
-              ],*/
             );
           });
 }
 
-class ShowScoreDialogs {
+
+
+class UnansweredDialogs {
   Future<void> DialogBox(String message, BuildContext context) async =>
       showDialog(
           context: context,
           builder: (BuildContext context) {
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.of(context).pop();
+            });
             return AlertDialog(
               shape: const RoundedRectangleBorder(
                 side: BorderSide(
                   color: Color(
-                    0XFF3E1452,
+                    0XFF9B0404,
                   ),
                   width: 2.0,
                 ),
@@ -289,19 +211,12 @@ class ShowScoreDialogs {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'images/incorrect.png',
+                      'images/alert.png',
                       height: 50,
                       width: 166,
                     ),
                     const SizedBox(
                       height: 7,
-                    ),
-                    const Text(
-                      'Oops!... wrong answer',
-                      style: TextStyle(
-                        color: Color(0XFF9B0404),
-                        fontSize: 24,
-                      ),
                     ),
                   ],
                 ),
@@ -310,54 +225,13 @@ class ShowScoreDialogs {
                 padding: const EdgeInsets.only(left: 7.0, right: 7.0),
                 child: Text(
                   message,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Color(0XFF3E721D),
+                    color: Color(0XFF9B0404),
                     fontSize: 24,
                   ),
                 ),
               ),
-/*
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0, bottom: 10),
-                  child: SizedBox(
-                    width: 180,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF52143F),
-                          minimumSize: const Size.fromHeight(52),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(24)),
-                          ),
-                          side: const BorderSide(
-                              width: 1, color: Color(0xFF52143F)),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "Next ",
-                              style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: Color.fromRGBO(62, 20, 82, 1.0)),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 2.0),
-                                child: Icon(
-                                  FontAwesomeIcons.circleArrowRight,
-                                  color: Color.fromRGBO(62, 20, 82, 1.0),
-                                )),
-                          ],
-                        )),
-                  ),
-                ),
-              ],*/
             );
           });
 }

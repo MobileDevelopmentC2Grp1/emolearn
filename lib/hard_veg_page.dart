@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'dialogs.dart';
-import 'hard_qn.dart';
+import 'hard_veg_qn.dart';
 import 'main.dart';
 
-class HardPage extends StatefulWidget {
-  const HardPage({super.key});
+class HardVegPage extends StatefulWidget {
+  const HardVegPage({super.key});
   // final HardQuestion hardList;
 
   @override
-  State<HardPage> createState() => _HardPageState();
+  State<HardVegPage> createState() => _HardVegPageState();
 }
 
-class _HardPageState extends State<HardPage> {
+class _HardVegPageState extends State<HardVegPage> {
   // Create a text controller  to retrieve the value
   final _textController = TextEditingController();
   final HelpDialogs hardDialog = HelpDialogs();

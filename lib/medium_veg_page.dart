@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/main.dart';
 import 'dialogs.dart';
-import 'medium_qn.dart';
+import 'medium_veg_qn.dart';
 
-class MediumPage extends StatefulWidget {
-  const MediumPage({super.key});
+class MediumVegPage extends StatefulWidget {
+  const MediumVegPage({super.key});
 
   @override
-  State<MediumPage> createState() => _MediumPageState();
+  State<MediumVegPage> createState() => _MediumVegPageState();
 }
 
-class _MediumPageState extends State<MediumPage> {
+class _MediumVegPageState extends State<MediumVegPage> {
   final HelpDialogs mediumDialog = HelpDialogs();
   final WrongAnswerDialogs wrongAnswerDialog = WrongAnswerDialogs();
   final CorrectAnswerDialogs correctAnswerDialogs = CorrectAnswerDialogs();
   final UnansweredDialogs unansweredDialogs = UnansweredDialogs();
   // bool iscorrect = false;
   List<MediumQuestion> questionList = getQuestions();
-  //String correctAnswerText = question.answersList.firstWhere((answer) => answer.isCorrect).correctAnswerText;
-
   int currentQuestionIndex = 0;
   int mediumscore = 0;
   Answer? selectedAnswer;
@@ -237,7 +235,7 @@ class _MediumPageState extends State<MediumPage> {
       correctAnswerDialogs.DialogBox('You are correct', context);
     } else {
       wrongAnswerDialog.DialogBox(
-          'The answer is: ${questionList[currentQuestionIndex].answersList[2]}',
+          'The answer is: ${questionList[currentQuestionIndex].answersList[1]}',
           context);
     }
   }
@@ -329,14 +327,4 @@ class _MediumPageState extends State<MediumPage> {
           ]),
         ));
   }
-  String correctAnswerText() {
-    for (Answer answer in questionList[currentQuestionIndex].answersList) {
-      if (answer.isCorrect) {
-        return answer.answerText;
-      }
-    }
-    return '';
-  }
-  
-
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:on_boarding/easy_veg_page.dart';
+import 'package:on_boarding/hard_veg_page.dart';
+import 'package:on_boarding/medium_veg_page.dart';
 import 'medium_page.dart';
 
 import 'easy_page.dart';
@@ -46,6 +49,12 @@ class GameLevel extends StatelessWidget {
       return const MediumPage();
     } else if (no == 3) {
       return const HardPage();
+    } else if (no == 4) {
+      return const EasyVegPage();
+    } else if (no == 5) {
+      return const MediumVegPage();
+    } else if (no == 6) {
+      return const HardVegPage();
     }
   }
 }

@@ -26,4 +26,18 @@ List<EasyQuestion> easyList = [
       question: "What fruit is this?",
       imageUrl: "images/pear.png",
       answer: "PEAR"),
+  EasyQuestion(
+      question: "What fruit is this?",
+      imageUrl: "images/lemon_easy.png",
+      answer: "LEMON"),
+
+  EasyQuestion(
+      question: "What fruit is this?",
+      imageUrl: "images/avocado_easy.png",
+      answer: "AVOCADO"),
+
+  EasyQuestion(
+      question: "What fruit is this?",
+      imageUrl: "images/guava_easy.png",
+      answer: "GUAVA"),
 ];

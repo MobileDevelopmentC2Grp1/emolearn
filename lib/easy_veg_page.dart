@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/main.dart';
 import 'dialogs.dart';
-import 'easy_qn.dart';
+import 'easy_veg_qn.dart';
 import 'dart:math';
-import 'dart:ui';
 import 'dart:async';
 
-class EasyPage extends StatefulWidget {
-  const EasyPage({super.key});
+class EasyVegPage extends StatefulWidget {
+  const EasyVegPage({super.key});
   //final EasyQuestion easyList;
 
   @override
-  State<EasyPage> createState() => _EasyPageState();
+  State<EasyVegPage> createState() => _EasyVegPageState();
 }
 
-class _EasyPageState extends State<EasyPage> {
+class _EasyVegPageState extends State<EasyVegPage> {
   // Create a text controller  to retrieve the iput from the user
   final easytextController = TextEditingController();
   String? currentWord;
@@ -25,8 +24,8 @@ class _EasyPageState extends State<EasyPage> {
   final WrongAnswerDialogs wrongAnswerDialog = WrongAnswerDialogs();
   final CorrectAnswerDialogs correctAnswerDialogs = CorrectAnswerDialogs();
 
-  int easyIndex = 0;
-  int easyScore = 0;
+  int easyVegIndex = 0;
+  int easyVegScore = 0;
   bool isFirstPopupVisible = false;
 
   @override
@@ -93,12 +92,12 @@ class _EasyPageState extends State<EasyPage> {
           padding: const EdgeInsets.fromLTRB(32, 32, 32, 32),
           child: Column(children: [
             Text(
-              "Question ${easyIndex + 1} of ${easyList.length.toString()}",
+              "Question ${easyVegIndex + 1} of ${easyVegList.length.toString()}",
               style: const TextStyle(
                   fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
             ),
             Text(
-              easyList[easyIndex].question,
+              easyVegList[easyVegIndex].question,
               style: const TextStyle(
                   fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
             ),
@@ -106,7 +105,7 @@ class _EasyPageState extends State<EasyPage> {
               height: 32.0,
             ),
             Image.asset(
-              easyList[easyIndex].imageUrl,
+              easyVegList[easyVegIndex].imageUrl,
               width: 200.0,
               height: 200.0,
             ),
@@ -129,9 +128,6 @@ class _EasyPageState extends State<EasyPage> {
         child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //const SizedBox(
-              // height: 16.0,
-              // ),
               TextFormField(
                 maxLength: 1,
                 controller: easytextController,
@@ -161,7 +157,6 @@ class _EasyPageState extends State<EasyPage> {
               const SizedBox(
                 height: 48.0,
               ),
-
               easyNextQuestion(),
             ]),
       )
@@ -170,27 +165,16 @@ class _EasyPageState extends State<EasyPage> {
 
   generateWord() {
     // randomly select a word from the list
-    currentWord = easyList[easyIndex].answer;
+    currentWord = easyVegList[easyVegIndex].answer;
     // randomly choose a letter to be missing
     int missingIndex = Random().nextInt(currentWord!.length);
     missingLetter = currentWord?[missingIndex];
     currentWord = currentWord?.replaceFirst(missingLetter!, '◻');
   }
 
-  /* setState(() {
-      if (easyIndex == easyList.length - 1) {
-        easyquizFinished = true;
-      } else {
-        easyIndex++;
-        generateWord();
-      }
-      easytextController.clear();
-    });
-  }*/
-
   easyNextQuestion() {
     bool isEasyLastQuestion = false;
-    if (easyIndex == easyList.length - 1) {
+    if (easyVegIndex == easyVegList.length - 1) {
       isEasyLastQuestion = true;
     }
     return SizedBox(
@@ -218,14 +202,12 @@ class _EasyPageState extends State<EasyPage> {
               showDialog(
                   context: context, builder: (_) => showEasyScoreDialog());
             } else {
-              // show dialogue here(whether answer is wrong or correct)
-
               //next question
 
               setState(() {
                 checkEasyAnswer();
                 easytextController.clear();
-                easyIndex++;
+                easyVegIndex++;
                 generateWord();
               });
             }
@@ -242,7 +224,7 @@ class _EasyPageState extends State<EasyPage> {
   checkEasyAnswer() {
     String userAnswer = easytextController.text.trim();
     if (userAnswer.toLowerCase() == missingLetter!.toLowerCase()) {
-      easyScore++;
+      easyVegScore++;
       correctAnswerDialogs.DialogBox('You are correct', context);
     } else {
       wrongAnswerDialog.DialogBox(
@@ -278,10 +260,9 @@ class _EasyPageState extends State<EasyPage> {
                   style: TextStyle(
                     fontSize: 24,
                   )),
-              Text("$easyScore / ${easyList.length.toString()}",
+              Text("$easyVegScore / ${easyVegList.length.toString()}",
                   style: const TextStyle(
-                    fontSize: 28,fontWeight: FontWeight.bold
-                  )),
+                      fontSize: 28, fontWeight: FontWeight.bold)),
             ]),
             const SizedBox(
               height: 10.0,
@@ -302,8 +283,8 @@ class _EasyPageState extends State<EasyPage> {
                   onPressed: () {
                     Navigator.pop(context);
                     setState(() {
-                      easyIndex = 0;
-                      easyScore = 0;
+                      easyVegIndex = 0;
+                      easyVegScore = 0;
                       //easyquizFinished = false;
                       generateWord();
                       easytextController.clear();
