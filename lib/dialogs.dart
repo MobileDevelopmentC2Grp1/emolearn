@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:on_boarding/notification_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -385,7 +386,10 @@ class SettingsDialog {
     }
   }
 
-  Future<void> DialogBox(BuildContext context) async => showDialog(
+  Future<void> DialogBox(BuildContext context) async {
+    await Hive.openBox("settingsBox");
+    
+    return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -434,43 +438,57 @@ class SettingsDialog {
               ],
             ),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [NotificationSwitch()],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                      onTap: _launchUrl,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            "Privacy policy",
-                            style: TextStyle(
-                                fontSize: 24.0,
-                                color: Color.fromRGBO(62, 20, 82, 1.0)),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(bottom: 2.0),
-                              child: Icon(
-                                FontAwesomeIcons.angleRight,
-                                color: Color.fromRGBO(62, 20, 82, 1.0),
-                                size: 18.0,
-                              )),
-                        ],
-                      ))
-                ],
-              )
-            ],
+          content: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Send me reminders to learn",
+                      style: TextStyle(
+                          fontSize: 20.0, color: Color.fromRGBO(62, 20, 82, 1.0)),
+                    ),
+                    SizedBox(
+                      width: 24.0,
+                    ),
+                    NotificationSwitch()
+                  ],
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                        onTap: _launchUrl,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "Privacy policy",
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Color.fromRGBO(62, 20, 82, 1.0)),
+                            ),
+                            SizedBox(width: 24.0),
+                            Icon(
+                              FontAwesomeIcons.angleRight,
+                              color: Color.fromRGBO(5, 2, 7, 1),
+                              size: 18.0,
+                            ),
+                          ],
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
         );
       });
+  }
 }

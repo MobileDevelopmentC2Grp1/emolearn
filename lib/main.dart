@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:on_boarding/dialogs.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,13 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // initialize flutter
+  await Hive.initFlutter();
+
+  // open the settingsBox
+  await Hive.openBox("settingsBox");
+
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   show = prefs.getBool('ON_BOARDING') ?? true;
