@@ -235,7 +235,7 @@ class _MediumVegPageState extends State<MediumVegPage> {
       correctAnswerDialogs.DialogBox('You are correct', context);
     } else {
       wrongAnswerDialog.DialogBox(
-          'The answer is: ${questionList[currentQuestionIndex].answersList[1]}',
+          'The answer is: ${ questionList[currentQuestionIndex].correctAnswerText}',
           context);
     }
   }

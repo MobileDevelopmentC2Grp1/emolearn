@@ -237,7 +237,7 @@ class _MediumPageState extends State<MediumPage> {
       correctAnswerDialogs.DialogBox('You are correct', context);
     } else {
       wrongAnswerDialog.DialogBox(
-          'The answer is: ${questionList[currentQuestionIndex].answersList[2]}',
+          'The answer is: ${questionList[currentQuestionIndex].correctAnswerText}',
           context);
     }
   }
@@ -329,14 +329,7 @@ class _MediumPageState extends State<MediumPage> {
           ]),
         ));
   }
-  String correctAnswerText() {
-    for (Answer answer in questionList[currentQuestionIndex].answersList) {
-      if (answer.isCorrect) {
-        return answer.answerText;
-      }
-    }
-    return '';
-  }
+  
   
 
 }
