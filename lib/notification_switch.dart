@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hive/hive.dart';
+import 'package:on_boarding/notification_service.dart';
 
 class NotificationSwitch extends StatefulWidget {
   const NotificationSwitch({super.key});
@@ -13,12 +14,14 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   late final Box box;
 
   bool notify = false;
+  NotificationsService notificationsService = NotificationsService();
 
   @override
   void initState() {
     super.initState();
     // reference an already opened box
     box = Hive.box("settingsBox");
+    notificationsService.initializeNotifications();
   }
 
   @override
@@ -52,6 +55,9 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   _updateNotifState(bool value) {
     // Update notification status of settings box
     box.put("notify", value);
+    if (value == true) {
+      notificationsService.sendNotification("Title", "Body 101");
+    }
     print("Settings updated to $value");
   }
 
