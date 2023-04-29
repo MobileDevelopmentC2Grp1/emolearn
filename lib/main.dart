@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:on_boarding/howtoplay.dart';
@@ -19,9 +21,18 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Displaying on_boarding screen only once
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   show = prefs.getBool('ON_BOARDING') ?? true;
+
+  //Setting Hive up
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  // Opening a box
+  await Hive.openBox('userscore');
   runApp(const MyApp());
 }
 

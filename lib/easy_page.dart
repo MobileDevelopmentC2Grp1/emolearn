@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_boarding/main.dart';
 import 'dialogs.dart';
 import 'easy_qn.dart';
 import 'dart:math';
-import 'dart:ui';
 import 'dart:async';
 
 class EasyPage extends StatefulWidget {
@@ -20,19 +20,60 @@ class _EasyPageState extends State<EasyPage> {
   String? currentWord;
   String? missingLetter;
 
-  final HelpDialogs easyDialog = HelpDialogs();
+  // Form key
   final formKey = GlobalKey<FormState>();
+
+  // creating instance of dialogs classes
+  final HelpDialogs easyDialog = HelpDialogs();
   final WrongAnswerDialogs wrongAnswerDialog = WrongAnswerDialogs();
   final CorrectAnswerDialogs correctAnswerDialogs = CorrectAnswerDialogs();
 
+  // tracking the current index
   int easyIndex = 0;
+  // storing the user's score
   int easyScore = 0;
   bool isFirstPopupVisible = false;
+  int getStoredScore = 0;
+
+  //Creating a varibale to reference to the box
+  // final sampleBox = Hive.box('userscore');
+  late final Box sampleBox;
 
   @override
   void initState() {
     super.initState();
     generateWord();
+    _openBox();
+  }
+
+Future<void> _openBox() async {
+  await Hive.initFlutter();
+  sampleBox = await Hive.openBox('userscore');
+}
+
+  @override
+  void dispose() {
+    sampleBox.close();
+    super.dispose();
+  }
+
+  Future<void> updateScore(int num) async {
+    try {
+      if (!Hive.isBoxOpen('userscore')) {
+      await _openBox();
+    }
+
+      if (sampleBox.isEmpty) {
+        sampleBox.put('score', num);
+      } else {
+        int storedScore = sampleBox.get('score', defaultValue: 0);
+        storedScore += num;
+        sampleBox.put('score', storedScore);
+      }
+    } catch (e) {
+      // Handle any errors that occur while updating the score
+      print('Error updating score: $e');
+    }
   }
 
   @override
@@ -177,17 +218,6 @@ class _EasyPageState extends State<EasyPage> {
     currentWord = currentWord?.replaceFirst(missingLetter!, '◻');
   }
 
-  /* setState(() {
-      if (easyIndex == easyList.length - 1) {
-        easyquizFinished = true;
-      } else {
-        easyIndex++;
-        generateWord();
-      }
-      easytextController.clear();
-    });
-  }*/
-
   easyNextQuestion() {
     bool isEasyLastQuestion = false;
     if (easyIndex == easyList.length - 1) {
@@ -217,6 +247,7 @@ class _EasyPageState extends State<EasyPage> {
               // ignore: use_build_context_synchronously
               showDialog(
                   context: context, builder: (_) => showEasyScoreDialog());
+              updateScore(easyScore);
             } else {
               // show dialogue here(whether answer is wrong or correct)
 
@@ -238,6 +269,8 @@ class _EasyPageState extends State<EasyPage> {
           ),
         ));
   }
+
+  //Function to add to the local storage
 
   checkEasyAnswer() {
     String userAnswer = easytextController.text.trim();
@@ -280,8 +313,7 @@ class _EasyPageState extends State<EasyPage> {
                   )),
               Text("$easyScore / ${easyList.length.toString()}",
                   style: const TextStyle(
-                    fontSize: 28,fontWeight: FontWeight.bold
-                  )),
+                      fontSize: 28, fontWeight: FontWeight.bold)),
             ]),
             const SizedBox(
               height: 10.0,

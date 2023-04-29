@@ -80,7 +80,7 @@ class _SignUpState extends State<SignUp> {
         pwdController.clear();
         confirmPwdController.clear();
       }
-    }else{
+    } else {
       _errorHandling.DialogBox("Passwords don't match", context);
       emailController.clear();
       usernameController.clear();

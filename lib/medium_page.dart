@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_boarding/main.dart';
 import 'dialogs.dart';
 import 'medium_qn.dart';
@@ -23,6 +24,47 @@ class _MediumPageState extends State<MediumPage> {
   int mediumscore = 0;
   Answer? selectedAnswer;
   int scoreIfCorrect = 0;
+  int getStoredScore = 0;
+
+  //Creating a varibale to reference to the box
+  // final sampleBox = Hive.box('userscore');
+  late final Box sampleBox;
+
+  @override
+  void initState() {
+    super.initState();
+    _openBox();
+  }
+
+  Future<void> _openBox() async {
+    await Hive.initFlutter();
+    sampleBox = await Hive.openBox('userscore');
+  }
+
+  @override
+  void dispose() {
+    sampleBox.close();
+    super.dispose();
+  }
+
+  Future<void> updateScore(int num) async {
+    try {
+      if (!Hive.isBoxOpen('userscore')) {
+        await _openBox();
+      }
+
+      if (sampleBox.isEmpty) {
+        sampleBox.put('score', num);
+      } else {
+        int storedScore = sampleBox.get('score', defaultValue: 0);
+        storedScore += num;
+        sampleBox.put('score', storedScore);
+      }
+    } catch (e) {
+      // Handle any errors that occur while updating the score
+      print('Error updating score: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -210,6 +252,7 @@ class _MediumPageState extends State<MediumPage> {
               await Future.delayed(const Duration(seconds: 3));
               showDialog(
                   context: context, builder: (_) => showMediumScoreDialog());
+              updateScore(mediumscore);
             } else {
               checkMediumQuestion();
               scoreIfCorrect = mediumscore;
@@ -329,7 +372,4 @@ class _MediumPageState extends State<MediumPage> {
           ]),
         ));
   }
-  
-  
-
 }
