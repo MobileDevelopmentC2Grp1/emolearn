@@ -39,11 +39,11 @@ class _MediumPageState extends State<MediumPage> {
                     onTap: () {
                       mediumDialog.DialogBox(
                           'MEDIUM - Choose the correct word that accurately matches the word formed by combining the emojis from the list below.',
-                          'images/medium_help.png',
+                          'assets/images/medium_help.png',
                           context);
                     },
                     child: Ink.image(
-                      image: const AssetImage('images/info_icon.png'),
+                      image: const AssetImage('assets/images/info_icon.png'),
                       width: 38,
                       height: 24,
                     )),
@@ -56,7 +56,7 @@ class _MediumPageState extends State<MediumPage> {
                       Navigator.pop(context);
                     },
                     child: Ink.image(
-                      image: const AssetImage('images/close_icon.png'),
+                      image: const AssetImage('assets/images/close_icon.png'),
                       width: 42,
                       height: 28,
                     )),

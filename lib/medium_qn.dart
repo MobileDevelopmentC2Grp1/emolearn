@@ -22,7 +22,7 @@ List<MediumQuestion> getQuestions() {
 
   mediumList.add(MediumQuestion(
     question: "Choose the correct answer from the ones given below",
-    imageUrl: "images/pear_medium.png",
+    imageUrl: "assets/images/pear_medium.png",
     answersList: [
       Answer("A    Peach", false),
       Answer("B    Pear", true),

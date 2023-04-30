@@ -95,7 +95,7 @@ class ProfileNoAccount extends StatelessWidget {
                   left: 16.0, right: 16.0, top: 40.0, bottom: 40.0),
               child: Column(children: [
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image.asset("images/stars.png", width: 136.0, height: 65.0)
+                  Image.asset("assets/images/stars.png", width: 136.0, height: 65.0)
                 ]),
                 const SizedBox(
                   height: 32.0,
@@ -237,13 +237,13 @@ class ProfileWithAccount extends StatelessWidget {
             child: Column(
               children: [
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image.asset("images/profile.png", width: 216.0, height: 68.95)
+                  Image.asset("assets/images/profile.png", width: 216.0, height: 68.95)
                 ]),
                 const SizedBox(
                   height: 32.0,
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image.asset("images/avatar.png", width: 136.0, height: 65.0),
+                  Image.asset("assets/images/avatar.png", width: 136.0, height: 65.0),
                   Text(
                     "${FirebaseAuth.instance.currentUser!.displayName}",
                     style: const TextStyle(

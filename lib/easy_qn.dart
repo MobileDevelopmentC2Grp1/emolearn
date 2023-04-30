@@ -16,14 +16,14 @@ List<EasyQuestion> easyList = [
 
   EasyQuestion(
       question: "What fruit is this?",
-      imageUrl: "images/grapes.png",
+      imageUrl: "assets/images/grapes.png",
       answer: "GRAPES"),
   EasyQuestion(
       question: "What fruit is this?",
-      imageUrl: "images/orange.png",
+      imageUrl: "assets/images/orange.png",
       answer: "ORANGE"),
   EasyQuestion(
       question: "What fruit is this?",
-      imageUrl: "images/pear.png",
+      imageUrl: "assets/images/pear.png",
       answer: "PEAR"),
 ];

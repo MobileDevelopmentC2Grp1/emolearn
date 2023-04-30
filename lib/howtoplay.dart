@@ -29,7 +29,7 @@ class HowToPlay extends StatelessWidget {
         height: 24.0,
       ),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Image.asset("images/howto1.png", width: 197.0, height: 196.1)
+        Image.asset("assets/images/howto1.png", width: 197.0, height: 196.1)
       ]),
       const SizedBox(
         height: 24.0,
@@ -42,7 +42,7 @@ class HowToPlay extends StatelessWidget {
         height: 24.0,
       ),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Image.asset("images/howto2.png", width: 197.0, height: 196.1)
+        Image.asset("assets/images/howto2.png", width: 197.0, height: 196.1)
       ]),
     ]);
   }

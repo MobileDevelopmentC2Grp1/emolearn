@@ -28,7 +28,7 @@ class Playground extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
-              'images/emoji.png',
+              'assets/images/emoji.png',
               width: 88.0,
               height: 24.24,
             ),
@@ -66,7 +66,7 @@ class Playground extends StatelessWidget {
           Positioned(
             right: 16.0,
             bottom: 65.0,
-            child: Image.asset('images/fruits.png', width: 140.0, height: 75.0),
+            child: Image.asset('assets/images/fruits.png', width: 140.0, height: 75.0),
           ),
         ]),
         const SizedBox(
@@ -101,7 +101,7 @@ class Playground extends StatelessWidget {
           Positioned(
             right: 16.0,
             bottom: 65.0,
-            child: Image.asset('images/vegetables.png',
+            child: Image.asset('assets/images/vegetables.png',
                 width: 140.0, height: 75.0),
           ),
         ])

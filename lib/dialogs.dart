@@ -35,7 +35,7 @@ class HelpDialogs {
                             },
                             child: Ink.image(
                               image:
-                                  const AssetImage('images/window-close.png'),
+                                  const AssetImage('assets/images/window-close.png'),
                               width: 24,
                               height: 24,
                             ))
@@ -113,7 +113,7 @@ class WrongAnswerDialogs {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'images/incorrect.png',
+                      'assets/images/incorrect.png',
                       height: 50,
                       width: 166,
                     ),
@@ -212,7 +212,7 @@ class CorrectAnswerDialogs {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'images/correct.png',
+                      'assets/images/correct.png',
                       height: 50,
                       width: 166,
                     ),
@@ -302,7 +302,7 @@ class ShowScoreDialogs {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'images/incorrect.png',
+                      'assets/images/incorrect.png',
                       height: 50,
                       width: 166,
                     ),
@@ -416,7 +416,7 @@ class SettingsDialog {
                           Navigator.pop(context);
                         },
                         child: Ink.image(
-                          image: const AssetImage('images/window-close.png'),
+                          image: const AssetImage('assets/images/window-close.png'),
                           width: 24,
                           height: 24,
                         ))
@@ -443,7 +443,7 @@ class SettingsDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text(
@@ -452,7 +452,7 @@ class SettingsDialog {
                           fontSize: 20.0, color: Color.fromRGBO(62, 20, 82, 1.0)),
                     ),
                     SizedBox(
-                      width: 24.0,
+                      height: 24.0,
                     ),
                     NotificationSwitch()
                   ],

@@ -22,7 +22,7 @@ class ErrorHandling {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'images/alert.png',
+                      'assets/images/alert.png',
                       height: 50,
                       width: 166,
                     ),

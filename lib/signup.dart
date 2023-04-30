@@ -165,7 +165,7 @@ class _SignUpState extends State<SignUp> {
                   const Center(
                     child: Image(
                       image: AssetImage(
-                        'images/stars.png',
+                        'assets/images/stars.png',
                       ),
                       fit: BoxFit.contain,
                       width: 120.0,
@@ -174,19 +174,14 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 20.0),
                   //Page description
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Create an account to track your performance",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Color(0xFF52143F),
-                          fontFamily: 'Exo Space',
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    "Create an account to track your performance",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF52143F),
+                      fontFamily: 'Exo Space',
+                      fontSize: 20.0,
+                    ),
                   ),
 
                   const SizedBox(height: 20),

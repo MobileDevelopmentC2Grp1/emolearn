@@ -10,20 +10,20 @@ class HardQuestion {
 List<HardQuestion> hardList = [
   HardQuestion(
     question: "Guess the fruit",
-    imageUrl: "images/watermelon.png",
+    imageUrl: "assets/images/watermelon.png",
     answer: "watermelon",
   ),
   HardQuestion(
     question: "Guess the fruit",
-    imageUrl: "images/mango_hard.png",
+    imageUrl: "assets/images/mango_hard.png",
     answer: "mango",
   ),
   HardQuestion(
       question: "Guess the fruit",
-      imageUrl: "images/treetomato_hard.png",
+      imageUrl: "assets/images/treetomato_hard.png",
       answer: 'treetomato'),
   HardQuestion(
       question: "Guess the fruit",
-      imageUrl: "images/pear_hard.png",
+      imageUrl: "assets/images/pear_hard.png",
       answer: "pear"),
 ];

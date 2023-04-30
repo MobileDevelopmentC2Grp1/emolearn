@@ -52,12 +52,12 @@ class _EasyPageState extends State<EasyPage> {
                   onTap: () {
                     easyDialog.DialogBox(
                         'EASY - Fill in the missing letters in the sequence given below to form the object in the picture.',
-                        'images/easy_help.png',
+                        'assets/images/easy_help.png',
                         context);
                     // print(model.description);
                   },
                   child: Ink.image(
-                    image: const AssetImage('images/info_icon.png'),
+                    image: const AssetImage('assets/images/info_icon.png'),
                     width: 38,
                     height: 24,
                   )),
@@ -70,7 +70,7 @@ class _EasyPageState extends State<EasyPage> {
                     Navigator.pop(context);
                   },
                   child: Ink.image(
-                    image: const AssetImage('images/close_icon.png'),
+                    image: const AssetImage('assets/images/close_icon.png'),
                     width: 42,
                     height: 28,
                   )),

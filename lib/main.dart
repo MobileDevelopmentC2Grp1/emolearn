@@ -19,6 +19,8 @@ import 'package:flame_audio/flame_audio.dart';
 //onboarding screen only once, that's for the first time
 bool show = true;
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -29,7 +31,7 @@ Future main() async {
   // open the settingsBox
   await Hive.openBox("settingsBox");
 
-  WidgetsFlutterBinding.ensureInitialized();
+  
   final prefs = await SharedPreferences.getInstance();
   show = prefs.getBool('ON_BOARDING') ?? true;
   runApp(const MyApp());
