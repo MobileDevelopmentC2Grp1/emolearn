@@ -5,11 +5,20 @@ class NotificationsService {
       FlutterLocalNotificationsPlugin();
 
   final AndroidInitializationSettings _androidInitializationSettings =
-      const AndroidInitializationSettings("emolearn_logo");
+      const AndroidInitializationSettings("logo");
+
+  allowNotifications() {
+    return _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestPermission();
+  }
 
   void initializeNotifications() async {
     InitializationSettings initializationSettings =
         InitializationSettings(android: _androidInitializationSettings);
+
+    // _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -19,13 +28,19 @@ class NotificationsService {
       "channelId", 
       "channelName",
       importance: Importance.max,
-      priority: Priority.high);
+      priority: Priority.high); 
 
     NotificationDetails notificationDetails = NotificationDetails(
       android: androidNotificationDetails
     );
 
-    await _flutterLocalNotificationsPlugin.show(0, title, body, notificationDetails);
+    // await _flutterLocalNotificationsPlugin.show(0, title, body, notificationDetails);
 
+    await _flutterLocalNotificationsPlugin.periodicallyShow(0, title, body, RepeatInterval.everyMinute, notificationDetails);
+
+  }
+
+  void stopNotifications() async {
+    _flutterLocalNotificationsPlugin.cancel(0);
   }
 }

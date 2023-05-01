@@ -26,7 +26,7 @@ Future main() async {
   );
 
   // initialize flutter
-  await Hive.initFlutter();
+  await Hive.initFlutter(); 
 
   // open the settingsBox
   await Hive.openBox("settingsBox");

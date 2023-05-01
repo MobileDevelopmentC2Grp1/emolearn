@@ -21,7 +21,7 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     super.initState();
     // reference an already opened box
     box = Hive.box("settingsBox");
-    notificationsService.initializeNotifications();
+    // notificationsService.initializeNotifications();
   }
 
   @override
@@ -52,18 +52,30 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     return state;
   }
 
-  _updateNotifState(bool value) {
+  _updateNotifState(bool value) async {
     // Update notification status of settings box
-    box.put("notify", value);
+
+    // if user activates switch
     if (value == true) {
-      notificationsService.sendNotification("Title", "Body 101");
+      // ask for permission
+      bool allow = await notificationsService.allowNotifications();
+      print(allow);
+      //
+      if (allow == true) {
+        notificationsService.sendNotification("Reminder", "Time to play!");
+      } else {
+        value = false;
+      }
     }
+    box.put("notify", value);
     print("Settings updated to $value");
   }
 
   _deleteNotifState() {
     // Delete notification status from settings box
-    box.delete("notify");
+    notificationsService.stopNotifications();
+    box.put("notify", false);
+    // box.delete("notify");
   }
 
   @override
@@ -81,7 +93,11 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
         onToggle: (value) {
           setState(() {
             notify = value;
-            _updateNotifState(notify);
+            if (notify == true) {
+              _updateNotifState(notify);
+            } else if (notify == false) {
+              _deleteNotifState();
+            }
             print(_getNotifState());
           });
         });
