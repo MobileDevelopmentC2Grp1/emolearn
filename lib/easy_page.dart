@@ -146,10 +146,13 @@ Future<void> _openBox() async {
             const SizedBox(
               height: 32.0,
             ),
-            Image.asset(
-              easyList[easyIndex].imageUrl,
-              width: 200.0,
-              height: 200.0,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                easyList[easyIndex].imageUrl,
+                width: 100.0,
+                height: 100.0,
+              ),
             ),
             Text(
               textAlign: TextAlign.center,

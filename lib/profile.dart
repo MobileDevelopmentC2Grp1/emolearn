@@ -148,44 +148,6 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
     }
   }
 
-  //Creating a varibale to reference to the box
-  // final sampleBox = Hive.box('userscore');
-//   late final Box sampleBox;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _openBox();
-//   }
-
-// Future<void> _openBox() async {
-//   await Hive.initFlutter();
-//   sampleBox = await Hive.openBox('userscore');
-// }
-
-//   @override
-//   void dispose() {
-//     sampleBox.close();
-//     super.dispose();
-//   }
-
-//   Future<int> displayScore() async {
-//   try {
-//     if (!Hive.isBoxOpen('userscore')) {
-//     await _openBox();
-//     }
-
-//     if (sampleBox.isEmpty) {
-//       return 0;
-//     } else {
-//       return sampleBox.get('score', defaultValue: 0);
-//     }
-//   } catch (e) {
-//     print('Error getting score from sampleBox: $e');
-//     return 0;
-//   }
-// }
-
   late final Box sampleBox;
 
   @override
@@ -201,6 +163,7 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
   }
 
   Future<int> displayScore() async {
+    await Hive.openBox('userscore');
     try {
       if (sampleBox.isEmpty) {
         return 0;
