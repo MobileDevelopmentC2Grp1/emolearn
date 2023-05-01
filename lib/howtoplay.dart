@@ -6,15 +6,7 @@ class HowToPlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      // Row(mainAxisAlignment: MainAxisAlignment.start, children: const [
-      //   Text("Emolearn",
-      //       textAlign: TextAlign.start,
-      //       style: TextStyle(
-      //           fontSize: 28.0, color: Color.fromRGBO(62, 20, 82, 1.0)))
-      // ]),
-      // const SizedBox(
-      //   height: 8.0,
-      // ),
+      
       const Text("How to Play:",
           style: TextStyle(
               fontSize: 40.0, color: Color.fromRGBO(62, 20, 82, 1.0))),

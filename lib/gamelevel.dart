@@ -30,13 +30,7 @@ class GameLevel extends StatelessWidget {
           child: getGameLevel(level),
         )
 
-            // child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     children: getGameLevel(level)
-            //     // HardPage(hardList: hardList[0]),
-            //     // EasyPage(easyList: easyList[0]),
-            //     // MediumPage(mediumList: mediumList),
-            //     ),
+            
             ),
       ),
     );

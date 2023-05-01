@@ -39,7 +39,7 @@ class StartScreen extends StatelessWidget {
                           fontSize: 28.0,
                           color: Color.fromRGBO(62, 20, 82, 1.0))),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Image.asset("images/game-day.png",
+                    Image.asset("assets/images/game-day.png",
                         width: 324.0, height: 350.0)
                   ]),
                   // if user chooses to play directly, they are directed to the playground

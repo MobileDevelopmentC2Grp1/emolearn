@@ -68,7 +68,7 @@ class FruitCategory extends StatelessWidget {
                     height: 24.0,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Image.asset("images/fruits_large.png",
+                    Image.asset("assets/images/fruits_large.png",
                         width: 272, height: 143.52)
                   ]),
                   const SizedBox(
