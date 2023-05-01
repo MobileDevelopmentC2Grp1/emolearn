@@ -24,23 +24,25 @@ class NotificationsService {
   }
 
   void sendNotification(String title, String body) async {
-    AndroidNotificationDetails androidNotificationDetails = const AndroidNotificationDetails(
-      "channelId", 
-      "channelName",
-      importance: Importance.max,
-      priority: Priority.high); 
+    _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestPermission();
 
-    NotificationDetails notificationDetails = NotificationDetails(
-      android: androidNotificationDetails
-    );
+    AndroidNotificationDetails androidNotificationDetails =
+        const AndroidNotificationDetails("channelId", "channelName",
+            importance: Importance.max, priority: Priority.high);
+
+    NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
 
     // await _flutterLocalNotificationsPlugin.show(0, title, body, notificationDetails);
 
-    await _flutterLocalNotificationsPlugin.periodicallyShow(0, title, body, RepeatInterval.everyMinute, notificationDetails);
-
+    await _flutterLocalNotificationsPlugin.periodicallyShow(
+        0, title, body, RepeatInterval.daily, notificationDetails);
   }
 
   void stopNotifications() async {
-    _flutterLocalNotificationsPlugin.cancel(0);
+    await _flutterLocalNotificationsPlugin.cancel(0);
   }
 }

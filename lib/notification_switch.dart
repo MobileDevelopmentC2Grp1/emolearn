@@ -55,21 +55,35 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   _updateNotifState(bool value) async {
     // Update notification status of settings box
 
-    // if user activates switch
-    if (value == true) {
-      // ask for permission
-      bool allow = await notificationsService.allowNotifications();
-      print(allow);
-      //
-      if (allow == true) {
-        notificationsService.sendNotification("Reminder", "Time to play!");
-      } else {
-        value = false;
-      }
-    }
+    // // ask for permission
+    // await notificationsService.allowNotifications();
+    // send notifications
+    notificationsService.sendNotification("Reminder", "Time to play!");
+
     box.put("notify", value);
+
     print("Settings updated to $value");
   }
+
+  // _updateNotifState(bool value) async {
+  //   // Update notification status of settings box
+
+  //   // if user activates switch
+  //   if (value == true) {
+  //     // ask for permission
+  //     bool allow = await notificationsService.allowNotifications();
+      
+  //     print("Allowing notifications: $allow");
+  
+  //     if (allow == true) {
+  //       notificationsService.sendNotification("Reminder", "Time to play!");
+  //     } else {
+  //       value = false;
+  //     }
+  //   }
+  //   box.put("notify", value);
+  //   print("Settings updated to $value");
+  // }
 
   _deleteNotifState() {
     // Delete notification status from settings box
@@ -96,6 +110,7 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
             if (notify == true) {
               _updateNotifState(notify);
             } else if (notify == false) {
+              print("notify is $notify!");
               _deleteNotifState();
             }
             print(_getNotifState());
