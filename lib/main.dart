@@ -12,7 +12,6 @@ import 'package:on_boarding/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flame_audio/flame_audio.dart';
 
 // Used to be able to show the
 //onboarding screen only once, that's for the first time
