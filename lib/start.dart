@@ -19,7 +19,7 @@ class StartScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Padding(
               padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 32.0),
+                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 25.0, bottom: 25.0),
               child: Column(
                 children: [
                   Row(
@@ -32,7 +32,7 @@ class StartScreen extends StatelessWidget {
                                 color: Color.fromRGBO(62, 20, 82, 1.0)))
                       ]),
                   const SizedBox(
-                    height: 24.0,
+                    height: 18.0,
                   ),
                   const Text("Are you ready?",
                       style: TextStyle(
@@ -40,9 +40,12 @@ class StartScreen extends StatelessWidget {
                           color: Color.fromRGBO(62, 20, 82, 1.0))),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Image.asset("images/game-day.png",
-                        width: 324.0, height: 350.0)
+                        width: 300.0, height: 300.0)
                   ]),
-                  // if user chooses to play directly, they are directed to the playground
+
+                  // if user chooses to play directly,
+                  // they are directed to the playground
+
                   TextButton(
                       onPressed: ((() {
                         Navigator.pushReplacement(
@@ -50,12 +53,6 @@ class StartScreen extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: ((context) => const MyHomePage())));
                       })),
-                      // onPressed: ((() {
-                      //   Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: ((context) => const Playground())));
-                      // })),
                       child: Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
@@ -72,9 +69,11 @@ class StartScreen extends StatelessWidget {
                                     fontSize: 24.0, color: Colors.white),
                               )))),
                   const SizedBox(
-                    height: 24.0,
+                    height: 15.0,
                   ),
-                  // In later iterations, this button would redirect the user to register/log in
+
+                  // Abutton to redirect the user to register/log in
+
                   TextButton(
                       onPressed: ((() {
                         Navigator.pushReplacement(

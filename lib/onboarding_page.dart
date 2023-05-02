@@ -14,18 +14,27 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   int currentIndex = 0;
   late PageController _controller;
 
+  // Overriding the dispose() method to dispose
+  // of _controller when the widget
+  // is removed from the widget tree
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  // Overriding initState() method 
+  //to initialize _controller with an initial page of 0
   @override
   void initState() {
     _controller = PageController(initialPage: 0);
     super.initState();
   }
 
+  // A function that sets a boolean value show to false
+  // and saves the device's SharedPreferences with the key 'ON_BOARDING' 
+  //to track whether the app's onboarding process has been completed
+  // so that it does not show again for the same user.
   _onboardingInfo() async {
     bool show = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -42,6 +51,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
+        //a custom AppBar widget with a transparent background and 
+        // a title of "Emolearn" with a custom style
         appBar: AppBar(
           title: const Padding(
             padding: EdgeInsets.only(left: 16.0, top: 20.0),
@@ -64,11 +76,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 controller: _controller,
                 itemCount: contents.length,
                 physics: const NeverScrollableScrollPhysics(),
+
+                // In this function, the current index 
+                //is updated in the state using setState.
+
                 onPageChanged: (index) {
                   setState(() {
                     currentIndex = index;
                   });
                 },
+
+                //A Column contains an Image.asset widget that displays an image
+                //a Text widget that displays the title of the current page, 
+                //and a Padding widget that contains a Text widget displaying 
+                //the description of the current page.
+
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -76,7 +98,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       children: <Widget>[
                         Image.asset(
                           contents[index].image,
-                          height: 270,
+                          height: 250,
                         ),
                         const SizedBox(height: 15),
                         Text(
@@ -107,6 +129,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 },
               ),
             ),
+
+            // Generating a list of dots based 
+            // on the number of items in the contents list
+            // each dot is created using the BuildDots function
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -154,6 +180,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
+  // BuildDots functions which holds the structure 
+  // and design of the list dots
   // ignore: non_constant_identifier_names
   Container BuildDots(int index, BuildContext context) {
     return Container(

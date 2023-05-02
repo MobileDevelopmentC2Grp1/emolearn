@@ -12,13 +12,13 @@ List<OnboardingContent> contents = [
     image: 'assets/images/emolearn.png',
     title: 'What is Emolearn?',
     description:
-        "It's an emoji- based puzzle game that aims to help kids in their early primary develop memory skills.",
+        "It’s an emoji- based puzzle game that aims to help kids in their early primary develop memory skills.",
   ),
   OnboardingContent(
     image: 'assets/images/2.png',
     title: 'What are Emojis?',
     description:
-        'An emoji is a visual representation of an emotion, object, or symbol',
+        'An emoji is a visual representation of an emotion, object, or symbol.',
   ),
   OnboardingContent(
     image: 'assets/images/1.png',

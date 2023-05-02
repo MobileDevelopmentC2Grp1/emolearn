@@ -60,11 +60,21 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
 
+  //This is a static list of three widgets: HowToPlay(), Playground(), and Profile(). 
+  //used for a bottom navigation bar widget, where each item in the list
+  // represents a different screen or page to be displayed.
   static const List<Widget> _pages = <Widget>[
     HowToPlay(),
     Playground(),
     Profile()
   ];
+
+  // Creating a buid widget which returns a container with a gradient 
+  // background color and a scaffold containing an app bar, a body and a bottom navigation bar. 
+  // The app bar contains a title and a settings icon button. The body is a single child scroll view 
+  // with pages that can be selected using the bottom navigation bar. The bottom navigation bar
+  // is a custom MoltenBottomNavigationBar widget that has three tabs: Help, Playground 
+  //and Profile. Each tab has an icon, title, selected color and unselected color.
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +131,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(
                     fontSize: 28.0, color: Color.fromRGBO(62, 20, 82, 1.0))),
           ),
-          // appBar: AppBar(
-          //   // Here we take the value from the MyHomePage object that was created by
-          //   // the App.build method, and use it to set our appbar title.
-          //   title: const Text("Emolearn"),
-          // ),
+           // Here we take the value from the MyHomePage object that was created by
+         // the App.build method, and use it to set our appbar title.
+        
           body: SingleChildScrollView(
               child: Padding(
                   padding:
@@ -169,6 +177,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ));
   }
+
+  //  A function that updates the selected index of a bottom navigation bar.
+  // When a tab is tapped, it calls this function and passes in the index of 
+  // the tapped tab. The function then calls setState() 
+  // to update the state of the widget, setting the _selectedIndex variable 
+  // to the tapped index. This triggers a rebuild of the widget, causing 
+  // the new selected tab to be displayed.
 
   void _onTabTapped(int index) {
     setState(() {

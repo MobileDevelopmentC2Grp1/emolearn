@@ -20,18 +20,32 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return const ProfileWithAccount();
+ Widget build(BuildContext context) {
+  return FutureBuilder(
+    future: Hive.openBox('userscore'),
+    builder: (BuildContext context, AsyncSnapshot<Box> snapshot) {
+      if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.hasError) {
+          return Text('Error opening Hive box: ${snapshot.error}');
         } else {
-          return const ProfileNoAccount();
+          var userscoreBox = snapshot.data!;
+          return StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ProfileWithAccount();
+              } else {
+                return ProfileNoAccount();
+              }
+            },
+          );
         }
-      },
-    );
-  }
+      } else {
+        return CircularProgressIndicator();
+      }
+    },
+  );
+}
 }
 
 class ProfileNoAccount extends StatelessWidget {
