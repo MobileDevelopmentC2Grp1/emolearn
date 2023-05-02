@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_boarding/dialogs.dart';
@@ -20,18 +23,29 @@ import 'package:flame_audio/flame_audio.dart';
 bool show = true;
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   // initialize flutter
-  await Hive.initFlutter(); 
+  await Hive.initFlutter();
+
+  // generate key to encrypt Hive box
+  final key = Hive.generateSecureKey();
+
+  // create instance of secure_storage
+  const secureStorage = FlutterSecureStorage();
+
+  // create encrypted settings box
+  await Hive.openBox("settingsBox", encryptionCipher: HiveAesCipher(key));
+
+  // store encrypted key in secure_storage
+  await secureStorage.write(key: "settingsKey", value: jsonEncode(key));
 
   // open the settingsBox
-  await Hive.openBox("settingsBox");
+  // await Hive.openBox("settingsBox");
 
-  
   final prefs = await SharedPreferences.getInstance();
   show = prefs.getBool('ON_BOARDING') ?? true;
   runApp(const MyApp());

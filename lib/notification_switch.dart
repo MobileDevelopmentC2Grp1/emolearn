@@ -53,6 +53,7 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   }
 
   _updateNotifState(bool value) async {
+
     // Update notification status of settings box
 
     // // ask for permission
