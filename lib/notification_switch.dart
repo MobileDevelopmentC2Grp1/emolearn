@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hive/hive.dart';
 import 'package:on_boarding/notification_service.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class NotificationSwitch extends StatefulWidget {
   const NotificationSwitch({super.key});
@@ -53,7 +54,6 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   }
 
   _updateNotifState(bool value) async {
-
     // Update notification status of settings box
 
     // // ask for permission
@@ -64,6 +64,10 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     box.put("notify", value);
 
     print("Settings updated to $value");
+
+    showSimpleNotification(const Text("Reminders on!"),
+        background: const Color.fromRGBO(62, 20, 82, 1.0),
+        position: NotificationPosition.bottom);
   }
 
   // _updateNotifState(bool value) async {
@@ -73,9 +77,9 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   //   if (value == true) {
   //     // ask for permission
   //     bool allow = await notificationsService.allowNotifications();
-      
+
   //     print("Allowing notifications: $allow");
-  
+
   //     if (allow == true) {
   //       notificationsService.sendNotification("Reminder", "Time to play!");
   //     } else {
@@ -90,6 +94,9 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     // Delete notification status from settings box
     notificationsService.stopNotifications();
     box.put("notify", false);
+    showSimpleNotification(const Text("Reminders off!"),
+        background: const Color.fromRGBO(62, 20, 82, 1.0),
+        position: NotificationPosition.bottom);
     // box.delete("notify");
   }
 

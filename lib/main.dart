@@ -6,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_boarding/dialogs.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:on_boarding/howtoplay.dart';
@@ -56,12 +57,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Emolearn',
-      theme: ThemeData(fontFamily: 'Exo Space'),
-      // show the splash screen if it is the user's first time, otherwise redirect to Start screen
-      home: show ? const SplashScreen() : const StartScreen(),
+    return OverlaySupport.global(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Emolearn',
+        theme: ThemeData(fontFamily: 'Exo Space'),
+        // show the splash screen if it is the user's first time, otherwise redirect to Start screen
+        home: show ? const SplashScreen() : const StartScreen(),
+      ),
     );
   }
 }
