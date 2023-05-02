@@ -74,7 +74,7 @@ class FruitCategory extends StatelessWidget {
                   const SizedBox(
                     height: 24.0,
                   ),
-                  const Text("Select Difficulty", 
+                  const Text("Select Difficulty",
                       style: TextStyle(
                           fontSize: 28.0,
                           color: Color.fromRGBO(62, 20, 82, 1.0))),
@@ -261,7 +261,13 @@ class VegetableCategory extends StatelessWidget {
                   ),
                   // Buttons to select the level of difficulty in vegetables category
                   OutlinedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameLevel(level: 4)));
+                      }),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
@@ -287,7 +293,13 @@ class VegetableCategory extends StatelessWidget {
                     height: 24.0,
                   ),
                   OutlinedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameLevel(level: 5)));
+                      }),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
@@ -313,7 +325,13 @@ class VegetableCategory extends StatelessWidget {
                     height: 24.0,
                   ),
                   OutlinedButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameLevel(level: 6)));
+                      }),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),

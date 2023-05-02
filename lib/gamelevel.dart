@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:on_boarding/easy_veg_page.dart';
+import 'package:on_boarding/hard_veg_page.dart';
+import 'package:on_boarding/medium_veg_page.dart';
 import 'medium_page.dart';
-
 import 'easy_page.dart';
 import 'hard_page.dart';
-
-
 
 class GameLevel extends StatelessWidget {
   const GameLevel({super.key, required this.level});
@@ -23,18 +23,10 @@ class GameLevel extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(245, 235, 250, 1.0),
         body: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 32.0),
+          padding: const EdgeInsets.only(
+              left: 16.0, right: 16.0, top: 8.0, bottom: 32.0),
           child: getGameLevel(level),
-        )
-
-            // child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     children: getGameLevel(level)
-            //     // HardPage(hardList: hardList[0]),
-            //     // EasyPage(easyList: easyList[0]),
-            //     // MediumPage(mediumList: mediumList),
-            //     ),
-            ),
+        )),
       ),
     );
   }
@@ -46,6 +38,12 @@ class GameLevel extends StatelessWidget {
       return const MediumPage();
     } else if (no == 3) {
       return const HardPage();
+    } else if (no == 4) {
+      return const EasyVegPage();
+    } else if (no == 5) {
+      return const MediumVegPage();
+    } else if (no == 6) {
+      return const HardVegPage();
     }
   }
 }

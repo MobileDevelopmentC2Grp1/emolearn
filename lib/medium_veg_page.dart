@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:on_boarding/main.dart';
 import 'dialogs.dart';
-import 'medium_qn.dart';
+import 'medium_veg_qn.dart';
 
-class MediumPage extends StatefulWidget {
-  const MediumPage({super.key});
+class MediumVegPage extends StatefulWidget {
+  const MediumVegPage({super.key});
 
   @override
-  State<MediumPage> createState() => _MediumPageState();
+  State<MediumVegPage> createState() => _MediumVegPageState();
 }
 
-class _MediumPageState extends State<MediumPage> {
+class _MediumVegPageState extends State<MediumVegPage> {
   final HelpDialogs mediumDialog = HelpDialogs();
   final WrongAnswerDialogs wrongAnswerDialog = WrongAnswerDialogs();
   final CorrectAnswerDialogs correctAnswerDialogs = CorrectAnswerDialogs();
   final UnansweredDialogs unansweredDialogs = UnansweredDialogs();
-
+  // bool iscorrect = false;
   List<MediumQuestion> questionList = getQuestions();
-
   int currentQuestionIndex = 0;
   int mediumscore = 0;
   Answer? selectedAnswer;
@@ -143,6 +142,10 @@ class _MediumPageState extends State<MediumPage> {
               side: const BorderSide(width: 1, color: Color(0xFF52143F)),
             ),
             onPressed: () {
+              // setState(() {
+              //     selectedAnswer = answer;
+              //   });
+              // bool iscorrect = false;
               if (selectedAnswer == null) {
                 if (answer.isCorrect) {
                   mediumscore++;
@@ -163,6 +166,8 @@ class _MediumPageState extends State<MediumPage> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(answer.answerText[0],
+                          // textAlign: TextAlign.center,
+                          // answer.answerText,
                           style: const TextStyle(
                             color: Color(0XFFFFFFFF),
                           )),
@@ -230,7 +235,7 @@ class _MediumPageState extends State<MediumPage> {
       correctAnswerDialogs.DialogBox('You are correct', context);
     } else {
       wrongAnswerDialog.DialogBox(
-          'The answer is: ${questionList[currentQuestionIndex].correctAnswerText}',
+          'The answer is: ${ questionList[currentQuestionIndex].correctAnswerText}',
           context);
     }
   }
@@ -270,50 +275,55 @@ class _MediumPageState extends State<MediumPage> {
             const SizedBox(
               height: 10.0,
             ),
-            Column(children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(220, 32),
-                  foregroundColor: Colors.white,
-                  shape: const StadiumBorder(),
-                  backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
+            Column(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(220, 32),
+                    foregroundColor: Colors.white,
+                    shape: const StadiumBorder(),
+                    backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
+                  ),
+                  child: const Text("Restart Quiz",
+                      style: TextStyle(
+                        fontSize: 18,
+                      )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      currentQuestionIndex = 0;
+                      mediumscore = 0;
+                      selectedAnswer = null;
+                      scoreIfCorrect = 0;
+                    });
+                  },
                 ),
-                child: const Text("Restart Quiz",
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    currentQuestionIndex = 0;
-                    mediumscore = 0;
-                    selectedAnswer = null;
-                    scoreIfCorrect = 0;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(220, 32),
-                  foregroundColor: Colors.white,
-                  shape: const StadiumBorder(),
-                  backgroundColor: const Color.fromARGB(255, 60, 5, 70),
+                const SizedBox(
+                  height: 15.0,
                 ),
-                child: const Text("Playground",
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const MyHomePage())));
-                },
-              ),
-            ])
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(220, 32),
+                    foregroundColor: Colors.white,
+                    shape: const StadiumBorder(),
+                    backgroundColor: const Color.fromARGB(255, 60, 5, 70),
+                  ),
+                  child: const Text("Playground",
+                      style: TextStyle(
+                        fontSize: 18,
+                      )),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => const MyHomePage())));
+                  },
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+              ],
+            ),
           ]),
         ));
   }

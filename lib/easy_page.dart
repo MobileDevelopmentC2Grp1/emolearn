@@ -3,19 +3,17 @@ import 'package:on_boarding/main.dart';
 import 'dialogs.dart';
 import 'easy_qn.dart';
 import 'dart:math';
-import 'dart:ui';
 import 'dart:async';
 
 class EasyPage extends StatefulWidget {
   const EasyPage({super.key});
-  //final EasyQuestion easyList;
 
   @override
   State<EasyPage> createState() => _EasyPageState();
 }
 
 class _EasyPageState extends State<EasyPage> {
-  // Create a text controller  to retrieve the iput from the user
+  // Create a text controller  to retrieve the input from the user
   final easytextController = TextEditingController();
   String? currentWord;
   String? missingLetter;
@@ -54,7 +52,6 @@ class _EasyPageState extends State<EasyPage> {
                         'EASY - Fill in the missing letters in the sequence given below to form the object in the picture.',
                         'assets/images/easy_help.png',
                         context);
-                    // print(model.description);
                   },
                   child: Ink.image(
                     image: const AssetImage('assets/images/info_icon.png'),
@@ -82,7 +79,6 @@ class _EasyPageState extends State<EasyPage> {
         height: 24.0,
       ),
       Container(
-        // ignore: sort_child_properties_last
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.transparent,
@@ -126,44 +122,37 @@ class _EasyPageState extends State<EasyPage> {
       ),
       Form(
         key: formKey,
-        child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //const SizedBox(
-              // height: 16.0,
-              // ),
-              TextFormField(
-                maxLength: 1,
-                controller: easytextController,
-                cursorColor: const Color(0XFF8CD65C),
-                decoration: InputDecoration(
-                  hintStyle:
-                      const TextStyle(color: Color.fromARGB(255, 60, 5, 70)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 60, 5, 70))),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  labelText: 'Type the missing letter here...',
-                  labelStyle: const TextStyle(
-                      color: Color.fromARGB(255, 60, 5, 70), fontSize: 20.0),
-                  fillColor: const Color(0xFFFFFFFF),
-                  filled: true,
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please fill this field';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 48.0,
-              ),
-
-              easyNextQuestion(),
-            ]),
+        child: Column(children: [
+          TextFormField(
+            maxLength: 1,
+            controller: easytextController,
+            cursorColor: const Color(0XFF8CD65C),
+            decoration: InputDecoration(
+              hintStyle: const TextStyle(color: Color.fromARGB(255, 60, 5, 70)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 60, 5, 70))),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+              labelText: 'Type the missing letter here...',
+              labelStyle: const TextStyle(
+                  color: Color.fromARGB(255, 60, 5, 70), fontSize: 20.0),
+              fillColor: const Color(0xFFFFFFFF),
+              filled: true,
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please fill this field';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(
+            height: 48.0,
+          ),
+          easyNextQuestion(),
+        ]),
       )
     ]);
   }
@@ -176,17 +165,6 @@ class _EasyPageState extends State<EasyPage> {
     missingLetter = currentWord?[missingIndex];
     currentWord = currentWord?.replaceFirst(missingLetter!, '◻');
   }
-
-  /* setState(() {
-      if (easyIndex == easyList.length - 1) {
-        easyquizFinished = true;
-      } else {
-        easyIndex++;
-        generateWord();
-      }
-      easytextController.clear();
-    });
-  }*/
 
   easyNextQuestion() {
     bool isEasyLastQuestion = false;
@@ -231,6 +209,9 @@ class _EasyPageState extends State<EasyPage> {
         },
         child: Text(
           isEasyLastQuestion ? "Finish" : "Submit",
+          style: const TextStyle(
+            fontSize: 24,
+          ),
         ),
       ),
     );
@@ -262,51 +243,74 @@ class _EasyPageState extends State<EasyPage> {
         elevation: 1.0,
         title: Center(
           child: Column(children: [
-            Text(
-              " Total Score : \n\n $easyScore out of ${easyList.length.toString()}",
+            Image.asset(
+              "assets/images/star_emoji.png",
+              height: 50,
+              width: 50,
             ),
             const SizedBox(
-              height: 24.0,
+              height: 15.0,
             ),
-            Center(
-              child: Row(children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: const StadiumBorder(),
-                    backgroundColor: const Color.fromARGB(255, 60, 5, 70),
-                  ),
-                  child: const Text("Restart Quiz"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    setState(() {
-                      easyIndex = 0;
-                      easyScore = 0;
-                      //easyquizFinished = false;
-                      generateWord();
-                      easytextController.clear();
-                    });
-                  },
+            Column(children: [
+              const Text(" Total Score ",
+                  style: TextStyle(
+                    fontSize: 24,
+                  )),
+              Text("$easyScore / ${easyList.length.toString()}",
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.bold)),
+            ]),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Column(children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(220, 32),
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                  backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
                 ),
-                const SizedBox(
-                  width: 8.0,
+                child: const Text("Restart Quiz",
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    easyIndex = 0;
+                    easyScore = 0;
+                    //easyquizFinished = false;
+                    generateWord();
+                    easytextController.clear();
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(220, 32),
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                  backgroundColor: const Color.fromARGB(255, 60, 5, 70),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: const StadiumBorder(),
-                    backgroundColor: const Color.fromARGB(255, 60, 5, 70),
-                  ),
-                  child: const Text("Playground"),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => const MyHomePage())));
-                  },
-                ),
-              ]),
-            )
+                child: const Text("Playground",
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const MyHomePage())));
+                },
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+            ])
           ]),
         ));
   }
