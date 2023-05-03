@@ -215,7 +215,8 @@ class _EasyPageState extends State<EasyPage> {
       )
     ]);
   }
-
+  // Function to randomly select a missing letter 
+  // in a word and replace it with an empty box[square-box]
   generateWord() {
     // randomly select a word from the list
     currentWord = easyList[easyIndex].answer;
@@ -224,7 +225,9 @@ class _EasyPageState extends State<EasyPage> {
     missingLetter = currentWord?[missingIndex];
     currentWord = currentWord?.replaceFirst(missingLetter!, '◻');
   }
-
+  // Function to determine whether to move to the next question 
+  // or to end the quiz deepending on whether the current
+  // question is the last one or not. 
   easyNextQuestion() {
     bool isEasyLastQuestion = false;
     if (easyIndex == easyList.length - 1) {

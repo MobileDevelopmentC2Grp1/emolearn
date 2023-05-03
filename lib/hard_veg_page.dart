@@ -196,7 +196,9 @@ class _HardVegPageState extends State<HardVegPage> {
       )
     ]);
   }
-
+  // Function to determine whether to move to the next question 
+  //or to end the quiz deepending on whether the current
+  // question is the last one or not. 
   hardNextQuestion() {
     bool isLastHardQuestion = false;
     if (index == hardList.length - 1) {
