@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_boarding/dialogs.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -17,7 +15,6 @@ import 'package:on_boarding/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flame_audio/flame_audio.dart';
 
 // Used to be able to show the
 //onboarding screen only once, that's for the first time
@@ -40,6 +37,8 @@ Future main() async {
 
   // create encrypted settings box
   await Hive.openBox("settingsBox", encryptionCipher: HiveAesCipher(key));
+
+  await Hive.openBox('userscore');
 
   // store encrypted key in secure_storage
   await secureStorage.write(key: "settingsKey", value: jsonEncode(key));
@@ -79,6 +78,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
 
+  //This is a static list of three widgets: HowToPlay(), Playground(), and Profile().
+  //used for a bottom navigation bar widget, where each item in the list
+  // represents a different screen or page to be displayed.
   static const List<Widget> _pages = <Widget>[
     HowToPlay(),
     Playground(),
@@ -86,6 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   final SettingsDialog settingsDialog = SettingsDialog();
+
+  // Creating a build widget which returns a container with a gradient
+  // background color and a scaffold containing an app bar, a body and a bottom navigation bar.
+  // The app bar contains a title and a settings icon button. The body is a single child scroll view
+  // with pages that can be selected using the bottom navigation bar. The bottom navigation bar
+  // is a custom MoltenBottomNavigationBar widget that has three tabs: Help, Playground
+  //and Profile. Each tab has an icon, title, selected color and unselected color.
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding:
                       const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
                   child: _pages.elementAt(_selectedIndex))),
-          // body: Center(
-          //   child: _pages.elementAt(_selectedIndex)
-          // ),
           bottomNavigationBar: MoltenBottomNavigationBar(
             barColor: const Color.fromRGBO(62, 20, 82, 1.0),
             domeHeight: 15.0,
@@ -193,6 +199,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
+//  A function that updates the selected index of a bottom navigation bar.
+  // When a tab is tapped, it calls this function and passes in the index of
+  // the tapped tab. The function then calls setState()
+  // to update the state of the widget, setting the _selectedIndex variable
+  // to the tapped index. This triggers a rebuild of the widget, causing
+  // the new selected tab to be displayed.
+  
   void _onTabTapped(int index) {
     setState(() {
       _selectedIndex = index;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'dialogs.dart';
 import 'hard_veg_qn.dart';
 import 'main.dart';
@@ -22,7 +23,47 @@ class _HardVegPageState extends State<HardVegPage> {
   int hardScore = 0;
   late bool isLastHardQuestion = false;
 
+  //Creating a variable to reference to the box
+  late final Box sampleBox;
+
   // late int questionNo;
+
+  @override
+  void initState() {
+    super.initState();
+    _openBox();
+  }
+
+  Future<void> _openBox() async {
+    await Hive.initFlutter();
+    sampleBox = await Hive.openBox('userscore');
+  }
+
+  @override
+  void dispose() {
+    sampleBox.close();
+    super.dispose();
+  }
+
+  Future<void> updateScore(int num) async {
+    try {
+      if (!Hive.isBoxOpen('userscore')) {
+        await _openBox();
+      }
+
+      if (sampleBox.isEmpty) {
+        sampleBox.put('score', num);
+      } else {
+        int storedScore = sampleBox.get('score', defaultValue: 0);
+        storedScore += num;
+        sampleBox.put('score', storedScore);
+      }
+    } catch (e) {
+      // Handle any errors that occur while updating the score
+      print('Error updating score: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -168,6 +209,7 @@ class _HardVegPageState extends State<HardVegPage> {
 
             // ignore: use_build_context_synchronously
             showDialog(context: context, builder: (_) => showHardScoreDialog());
+            updateScore(hardScore);
           } else {
             //next question
             setState(() {
@@ -196,7 +238,7 @@ class _HardVegPageState extends State<HardVegPage> {
     }
   }
 
-showHardScoreDialog() {
+  showHardScoreDialog() {
     return AlertDialog(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(24.0)),
@@ -249,8 +291,7 @@ showHardScoreDialog() {
                     setState(() {
                       index = 0;
                       hardScore = 0;
-                      
-                    
+
                       _textController.clear();
                     });
                   },
@@ -284,5 +325,4 @@ showHardScoreDialog() {
           ]),
         ));
   }
-
 }

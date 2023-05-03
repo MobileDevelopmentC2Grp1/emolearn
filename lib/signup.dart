@@ -80,7 +80,7 @@ class _SignUpState extends State<SignUp> {
         pwdController.clear();
         confirmPwdController.clear();
       }
-    }else{
+    } else {
       _errorHandling.DialogBox("Passwords don't match", context);
       emailController.clear();
       usernameController.clear();
@@ -89,6 +89,7 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+  // Checking the password and the confirmd password are the same
   bool confirmedPassword() {
     if (pwdController.text.trim() == confirmPwdController.text.trim()) {
       return true;
@@ -234,7 +235,7 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
 
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 5),
 
                         // username
                         Row(
@@ -270,6 +271,12 @@ class _SignUpState extends State<SignUp> {
                             fillColor: const Color(0xFFFFFFFF),
                             filled: true,
                           ),
+
+                          //The validator function takes a string value as input.
+                          // checks if the value is empty and then returns the error message "Please enter a username".
+                          // checks if the length of the value is less than 4 and then returns the error message "Username should be at least 4 characters".
+                          // If both conditions are false, the function returns null to indicate that the value is valid.
+
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter a username';
@@ -281,7 +288,7 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
 
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 5),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -316,6 +323,10 @@ class _SignUpState extends State<SignUp> {
                             fillColor: const Color(0xFFFFFFFF),
                             filled: true,
                           ),
+                          //The validator function takes a string value as input.
+                          // checks if the value is null or empty and then returns the error message "Please fill this field".
+                          // checks if the length of the value is less than 6 and then returns the error message "Password should be at least 6 characters long".
+                          // If both conditions are false, the function returns null to indicate that the value is valid.
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please fill this field';
@@ -327,7 +338,7 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
 
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 5),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -362,6 +373,12 @@ class _SignUpState extends State<SignUp> {
                             fillColor: const Color(0xFFFFFFFF),
                             filled: true,
                           ),
+
+                          //The validator function takes a string value as input.
+                          // checks if the value is null or empty and then returns the error message "Please fill this field".
+                          // checks if the length of the value is less than 6 and then returns the error message "Password should be at least 6 characters long".
+                          // If both conditions are false, the function returns null to indicate that the value is valid.
+
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -377,14 +394,14 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
 
-                  const SizedBox(height: 30.0),
+                  const SizedBox(height: 20.0),
 
                   //sign up button
                   PageButton(
                     onTap: userSignIn,
                   ),
 
-                  const SizedBox(height: 15.0),
+                  const SizedBox(height: 10.0),
 
                   // ----------- already a member ----------
                   const Text(
@@ -397,7 +414,7 @@ class _SignUpState extends State<SignUp> {
                   ),
 
                   const SizedBox(
-                    height: 15.0,
+                    height: 5.0,
                   ),
                   // sign in button
                   OutlinedButton(
@@ -425,7 +442,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                       )),
                   const SizedBox(
-                    height: 15.0,
+                    height: 5.0,
                   ),
                 ],
               ),

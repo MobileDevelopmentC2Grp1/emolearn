@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'dialogs.dart';
 import 'hard_qn.dart';
 import 'main.dart';
@@ -21,6 +22,47 @@ class _HardPageState extends State<HardPage> {
   int index = 0;
   int hardScore = 0;
   late bool isLastHardQuestion = false;
+
+  int getStoredScore = 0;
+
+  //Creating a variable to reference to the box
+  late final Box sampleBox;
+
+  @override
+  void initState() {
+    super.initState();
+    _openBox();
+  }
+
+  Future<void> _openBox() async {
+    await Hive.initFlutter();
+    sampleBox = await Hive.openBox('userscore');
+  }
+
+  @override
+  void dispose() {
+    sampleBox.close();
+    super.dispose();
+  }
+
+  Future<void> updateScore(int num) async {
+    try {
+      if (!Hive.isBoxOpen('userscore')) {
+        await _openBox();
+      }
+
+      if (sampleBox.isEmpty) {
+        sampleBox.put('score', num);
+      } else {
+        int storedScore = sampleBox.get('score', defaultValue: 0);
+        storedScore += num;
+        sampleBox.put('score', storedScore);
+      }
+    } catch (e) {
+      // Handle any errors that occur while updating the score
+      print('Error updating score: $e');
+    }
+  }
 
   // late int questionNo;
   @override
@@ -168,6 +210,7 @@ class _HardPageState extends State<HardPage> {
 
             // ignore: use_build_context_synchronously
             showDialog(context: context, builder: (_) => showHardScoreDialog());
+            updateScore(hardScore);
           } else {
             //next question
             setState(() {
@@ -211,49 +254,72 @@ class _HardPageState extends State<HardPage> {
         elevation: 1.0,
         title: Center(
           child: Column(children: [
-            Text(
-              " Total Score : \n\n $hardScore out of ${hardList.length.toString()}",
+            Image.asset(
+              "images/star_emoji.png",
+              height: 50,
+              width: 50,
             ),
             const SizedBox(
-              height: 24.0,
+              height: 15,
             ),
-            Center(
-              child: Row(children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: const StadiumBorder(),
-                    backgroundColor: const Color.fromARGB(255, 60, 5, 70),
-                  ),
-                  child: const Text("Restart Quiz"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    setState(() {
-                      index = 0;
-                      hardScore = 0;
-                      _textController.clear();
-                    });
-                  },
+            Column(children: [
+              const Text(" Total Score ",
+                  style: TextStyle(
+                    fontSize: 24,
+                  )),
+              Text("$hardScore / ${hardList.length.toString()}",
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.bold)),
+            ]),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Column(children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(220, 32),
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                  backgroundColor: const Color.fromARGB(255, 60, 5, 70),
                 ),
-                const SizedBox(
-                  width: 8.0,
+                child: const Text("Restart Quiz",
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    index = 0;
+                    hardScore = 0;
+                    _textController.clear();
+                  });
+                },
+              ),
+              const SizedBox(
+                width: 15.0,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(220, 32),
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                  backgroundColor: const Color.fromARGB(255, 60, 5, 70),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: const StadiumBorder(),
-                    backgroundColor: const Color.fromARGB(255, 60, 5, 70),
-                  ),
-                  child: const Text("Playground"),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => const MyHomePage())));
-                  },
-                ),
-              ]),
-            )
+                child: const Text("Playground",
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const MyHomePage())));
+                },
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+            ])
           ]),
         ));
   }

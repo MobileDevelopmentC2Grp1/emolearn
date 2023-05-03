@@ -34,7 +34,6 @@ List<EasyQuestion> easyList = [
       question: "What fruit is this?",
       imageUrl: "assets/images/avocado_easy.png",
       answer: "AVOCADO"),
-
   EasyQuestion(
       question: "What fruit is this?",
       imageUrl: "assets/images/guava_easy.png",
