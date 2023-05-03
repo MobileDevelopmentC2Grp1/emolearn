@@ -7,6 +7,7 @@ class NotificationsService {
   final AndroidInitializationSettings _androidInitializationSettings =
       const AndroidInitializationSettings("logo");
 
+  // ask for permission to send notifications on android
   allowNotifications() {
     return _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -17,8 +18,6 @@ class NotificationsService {
   void initializeNotifications() async {
     InitializationSettings initializationSettings =
         InitializationSettings(android: _androidInitializationSettings);
-
-    // _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -36,12 +35,12 @@ class NotificationsService {
     NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
 
-    // await _flutterLocalNotificationsPlugin.show(0, title, body, notificationDetails);
-
+    // send reminders on an hourly basis
     await _flutterLocalNotificationsPlugin.periodicallyShow(
         0, title, body, RepeatInterval.hourly, notificationDetails);
   }
 
+  // cancel notifications
   void stopNotifications() async {
     await _flutterLocalNotificationsPlugin.cancel(0);
   }

@@ -3,15 +3,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:on_boarding/dialogs.dart';
+import 'package:on_boarding/utilities/dialogs.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'firebase_options.dart';
+import 'config/firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:on_boarding/howtoplay.dart';
-import 'package:on_boarding/playground.dart';
-import 'package:on_boarding/profile.dart';
-import 'package:on_boarding/splash.dart';
-import 'package:on_boarding/start.dart';
+import 'package:on_boarding/home/howtoplay.dart';
+import 'package:on_boarding/home/playground.dart';
+import 'package:on_boarding/home/profile.dart';
+import 'package:on_boarding/home/start-up/splash.dart';
+import 'package:on_boarding/home/start-up/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       vertical: 8.0, horizontal: 16.0),
                   child: OutlinedButton(
                       onPressed: () {
-                        settingsDialog.DialogBox(context);
+                        settingsDialog.dialogBox(context);
                       },
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -153,11 +153,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(
                     fontSize: 28.0, color: Color.fromRGBO(62, 20, 82, 1.0))),
           ),
-          // appBar: AppBar(
-          //   // Here we take the value from the MyHomePage object that was created by
-          //   // the App.build method, and use it to set our appbar title.
-          //   title: const Text("Emolearn"),
-          // ),
           body: SingleChildScrollView(
               child: Padding(
                   padding:

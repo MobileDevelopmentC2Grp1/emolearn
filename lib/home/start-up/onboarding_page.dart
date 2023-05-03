@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:on_boarding/start.dart';
+import 'package:on_boarding/home/start-up/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'content_model.dart';
+import '../../models/content_model.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -148,6 +148,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 onPressed: () async {
                   if (currentIndex == contents.length - 1) {
                     await _onboardingInfo();
+                    // ignore: use_build_context_synchronously
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

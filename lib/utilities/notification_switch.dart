@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hive/hive.dart';
-import 'package:on_boarding/notification_service.dart';
+import 'package:on_boarding/utilities/notification_service.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class NotificationSwitch extends StatefulWidget {
@@ -22,7 +22,6 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     super.initState();
     // reference an already opened box
     box = Hive.box("settingsBox");
-    // notificationsService.initializeNotifications();
   }
 
   @override
@@ -40,12 +39,6 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     return const Icon(Icons.close);
   });
 
-  _addNotifState(bool value) async {
-    // Add notification status to settings box
-    box.put("notify", value);
-    return const Text('Settings updated');
-  }
-
   _getNotifState() {
     // Get notification status from settings box
     var state = box.get("notify") ?? false;
@@ -56,39 +49,15 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
   _updateNotifState(bool value) async {
     // Update notification status of settings box
 
-    // // ask for permission
-    // await notificationsService.allowNotifications();
     // send notifications
     notificationsService.sendNotification("Reminder", "Time to play!");
 
     box.put("notify", value);
 
-    print("Settings updated to $value");
-
     showSimpleNotification(const Text("Reminders on!"),
         background: const Color.fromRGBO(62, 20, 82, 1.0),
         position: NotificationPosition.bottom);
   }
-
-  // _updateNotifState(bool value) async {
-  //   // Update notification status of settings box
-
-  //   // if user activates switch
-  //   if (value == true) {
-  //     // ask for permission
-  //     bool allow = await notificationsService.allowNotifications();
-
-  //     print("Allowing notifications: $allow");
-
-  //     if (allow == true) {
-  //       notificationsService.sendNotification("Reminder", "Time to play!");
-  //     } else {
-  //       value = false;
-  //     }
-  //   }
-  //   box.put("notify", value);
-  //   print("Settings updated to $value");
-  // }
 
   _deleteNotifState() {
     // Delete notification status from settings box
@@ -97,14 +66,10 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
     showSimpleNotification(const Text("Reminders off!"),
         background: const Color.fromRGBO(62, 20, 82, 1.0),
         position: NotificationPosition.bottom);
-    // box.delete("notify");
   }
 
   @override
   Widget build(BuildContext context) {
-    // print(_getNotifState());
-
-    // final state = _getNotifState() ?? "NULL";
 
     return FlutterSwitch(
         activeColor: const Color.fromRGBO(62, 20, 82, 1.0),
@@ -118,10 +83,8 @@ class _NotificationSwitchState extends State<NotificationSwitch> {
             if (notify == true) {
               _updateNotifState(notify);
             } else if (notify == false) {
-              print("notify is $notify!");
               _deleteNotifState();
             }
-            print(_getNotifState());
           });
         });
   }

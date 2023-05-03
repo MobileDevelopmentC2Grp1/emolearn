@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:on_boarding/category.dart';
+import 'package:on_boarding/game/category.dart';
 
 // user can select category to play
 class Playground extends StatelessWidget {
   const Playground({super.key});
-
-  // final int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {

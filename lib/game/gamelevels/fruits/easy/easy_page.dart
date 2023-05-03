@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_boarding/main.dart';
-import 'dialogs.dart';
+import '../../../../utilities/dialogs.dart';
 import 'easy_qn.dart';
 import 'dart:math';
 import 'dart:async';
@@ -41,31 +42,32 @@ class _EasyPageState extends State<EasyPage> {
     super.initState();
     generateWord();
   }
+
   // set up and open a Hive box named "userscore"
   Future<void> _openBox() async {
     await Hive.initFlutter();
     sampleBox = await Hive.openBox('userscore');
   }
 
-  // close the Hive box 
+  // close the Hive box
   @override
   void dispose() {
     sampleBox.close();
     super.dispose();
   }
-  // The updateScore method updates the user's score in a Hive box called userscore. 
-  // 1. The method first checks if the userscore box is already open. 
+  // The updateScore method updates the user's score in a Hive box called userscore.
+  // 1. The method first checks if the userscore box is already open.
   // If not, it calls the _openBox() method to open it.
 
-  // 2. If the box is empty, meaning there is no score stored in it yet, 
+  // 2. If the box is empty, meaning there is no score stored in it yet,
   // the method puts the user's current score in the box using the key score.
 
-  // 3. If the box already has a score stored in it, 
-  // the method retrieves the stored score, 
+  // 3. If the box already has a score stored in it,
+  // the method retrieves the stored score,
   // adds the user's current score to it,
   // and puts the updated score back in the box.
 
-  // 4. If any errors occur while updating the score, 
+  // 4. If any errors occur while updating the score,
   // they are caught and printed to the console.
   Future<void> updateScore(int num) async {
     try {
@@ -82,140 +84,146 @@ class _EasyPageState extends State<EasyPage> {
       }
     } catch (e) {
       // Handle any errors that occur while updating the score
-      print('Error updating score: $e');
+      if (kDebugMode) {
+        print('Error updating score: $e');
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text("Emolearn",
-              style: TextStyle(
-                fontSize: 28,
-                color: Color.fromARGB(255, 60, 5, 70),
-              )),
-          Row(
-            children: [
-              InkWell(
-                  onTap: () {
-                    easyDialog.DialogBox(
-                        'EASY - Fill in the missing letters in the sequence given below to form the object in the picture.',
-                        'assets/images/easy_help.png',
-                        context);
-                  },
-                  child: Ink.image(
-                    image: const AssetImage('assets/images/info_icon.png'),
-                    width: 38,
-                    height: 24,
-                  )),
-              const SizedBox(
-                width: 8,
-              ),
-              // Cancel button
-              InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Ink.image(
-                    image: const AssetImage('assets/images/close_icon.png'),
-                    width: 42,
-                    height: 28,
-                  )),
-            ],
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 24.0,
-      ),
-      Container(
-        // ignore: sort_child_properties_last
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(24.0),
-          border: Border.all(color: const Color.fromRGBO(140, 214, 92, 1.0)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(32, 32, 32, 32),
-          child: Column(children: [
-            // Indicating the progress
-            Text(
-              "Question ${easyIndex + 1} of ${easyList.length.toString()}",
-              style: const TextStyle(
-                  fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 24.0),
+      child: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Emolearn",
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Color.fromARGB(255, 60, 5, 70),
+                )),
+            Row(
+              children: [
+                InkWell(
+                    onTap: () {
+                      easyDialog.dialogBox(
+                          'EASY - Fill in the missing letters in the sequence given below to form the object in the picture.',
+                          'assets/images/easy_help.png',
+                          context);
+                    },
+                    child: Ink.image(
+                      image: const AssetImage('assets/images/info_icon.png'),
+                      width: 38,
+                      height: 24,
+                    )),
+                const SizedBox(
+                  width: 8,
+                ),
+                // Cancel button
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Ink.image(
+                      image: const AssetImage('assets/images/close_icon.png'),
+                      width: 42,
+                      height: 28,
+                    )),
+              ],
             ),
-            Text(
-              easyList[easyIndex].question,
-              style: const TextStyle(
-                  fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+          ],
+        ),
+        const SizedBox(
+          height: 24.0,
+        ),
+        Container(
+          // ignore: sort_child_properties_last
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(24.0),
+            border: Border.all(color: const Color.fromRGBO(140, 214, 92, 1.0)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(32, 32, 32, 32),
+            child: Column(children: [
+              // Indicating the progress
+              Text(
+                "Question ${easyIndex + 1} of ${easyList.length.toString()}",
+                style: const TextStyle(
+                    fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+              ),
+              Text(
+                easyList[easyIndex].question,
+                style: const TextStyle(
+                    fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+              ),
+              const SizedBox(
+                height: 32.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  easyList[easyIndex].imageUrl,
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+              Text(
+                textAlign: TextAlign.center,
+                "Hint:\n$currentWord",
+                style: const TextStyle(
+                    letterSpacing: 4,
+                    fontSize: 24,
+                    color: Color.fromARGB(255, 60, 5, 70)),
+              ),
+            ]),
+          ),
+        ),
+        const SizedBox(
+          height: 48.0,
+        ),
+        Form(
+          key: formKey,
+          child: Column(children: [
+            TextFormField(
+              maxLength: 1,
+              controller: easytextController,
+              cursorColor: const Color(0XFF8CD65C),
+              decoration: InputDecoration(
+                hintStyle:
+                    const TextStyle(color: Color.fromARGB(255, 60, 5, 70)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 60, 5, 70))),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                labelText: 'Type the missing letter here...',
+                labelStyle: const TextStyle(
+                    color: Color.fromARGB(255, 60, 5, 70), fontSize: 20.0),
+                fillColor: const Color(0xFFFFFFFF),
+                filled: true,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please fill this field';
+                }
+                return null;
+              },
             ),
             const SizedBox(
-              height: 32.0,
+              height: 48.0,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                easyList[easyIndex].imageUrl,
-                width: 100.0,
-                height: 100.0,
-              ),
-            ),
-            Text(
-              textAlign: TextAlign.center,
-              "Hint:\n$currentWord",
-              style: const TextStyle(
-                  letterSpacing: 4,
-                  fontSize: 24,
-                  color: Color.fromARGB(255, 60, 5, 70)),
-            ),
+            easyNextQuestion(),
           ]),
-        ),
-      ),
-      const SizedBox(
-        height: 48.0,
-      ),
-      Form(
-        key: formKey,
-        child: Column(children: [
-          TextFormField(
-            maxLength: 1,
-            controller: easytextController,
-            cursorColor: const Color(0XFF8CD65C),
-            decoration: InputDecoration(
-              hintStyle: const TextStyle(color: Color.fromARGB(255, 60, 5, 70)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 60, 5, 70))),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-              labelText: 'Type the missing letter here...',
-              labelStyle: const TextStyle(
-                  color: Color.fromARGB(255, 60, 5, 70), fontSize: 20.0),
-              fillColor: const Color(0xFFFFFFFF),
-              filled: true,
-            ),
-            
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please fill this field';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 48.0,
-          ),
-          easyNextQuestion(),
-        ]),
-      )
-    ]);
+        )
+      ]),
+    );
   }
-  // Function to randomly select a missing letter 
+
+  // Function to randomly select a missing letter
   // in a word and replace it with an empty box[square-box]
   generateWord() {
     // randomly select a word from the list
@@ -225,9 +233,10 @@ class _EasyPageState extends State<EasyPage> {
     missingLetter = currentWord?[missingIndex];
     currentWord = currentWord?.replaceFirst(missingLetter!, '◻');
   }
-  // Function to determine whether to move to the next question 
+
+  // Function to determine whether to move to the next question
   // or to end the quiz deepending on whether the current
-  // question is the last one or not. 
+  // question is the last one or not.
   easyNextQuestion() {
     bool isEasyLastQuestion = false;
     if (easyIndex == easyList.length - 1) {
@@ -256,11 +265,10 @@ class _EasyPageState extends State<EasyPage> {
 
             // ignore: use_build_context_synchronously
             showDialog(context: context, builder: (_) => showEasyScoreDialog());
-            // Calling the updateScore method 
+            // Calling the updateScore method
             //to update the user's score in a Hive box
             updateScore(easyScore);
           } else {
-
             //next question
 
             setState(() {
@@ -282,23 +290,23 @@ class _EasyPageState extends State<EasyPage> {
   }
 
   // Function that checks if the player got a question right,
-  // if so, informs the player that they were correct 
-  // else a user in informed that they were wrong 
+  // if so, informs the player that they were correct
+  // else a user in informed that they were wrong
   //and is shown what the right answer was supposed to be
 
   checkEasyAnswer() {
     String userAnswer = easytextController.text.trim();
     if (userAnswer.toLowerCase() == missingLetter!.toLowerCase()) {
       easyScore++;
-      correctAnswerDialogs.DialogBox('You are correct', context);
+      correctAnswerDialogs.dialogBox('You are correct', context);
     } else {
-      wrongAnswerDialog.DialogBox(
+      wrongAnswerDialog.dialogBox(
           'The correct answer is: $missingLetter', context);
     }
   }
 
-  // Custom dialog which shows the score 
-  // of the player in a quiz with buttons 
+  // Custom dialog which shows the score
+  // of the player in a quiz with buttons
   // to replay the game of go to the playground
 
   showEasyScoreDialog() {

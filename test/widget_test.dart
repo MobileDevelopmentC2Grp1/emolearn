@@ -7,15 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:on_boarding/category.dart';
-import 'package:on_boarding/content_button.dart';
-import 'package:on_boarding/content_model.dart';
-import 'package:on_boarding/easy_qn.dart';
-import 'package:on_boarding/hard_qn.dart';
-import 'package:on_boarding/login_button.dart';
-import 'package:on_boarding/medium_qn.dart';
-import 'package:on_boarding/onboarding_page.dart';
-import 'package:on_boarding/start.dart';
+import 'package:on_boarding/game/category.dart';
+import 'package:on_boarding/utilities/content_button.dart';
+import 'package:on_boarding/models/content_model.dart';
+import 'package:on_boarding/game/gamelevels/fruits/easy/easy_qn.dart';
+import 'package:on_boarding/game/gamelevels/fruits/hard/hard_qn.dart';
+import 'package:on_boarding/utilities/login_button.dart';
+import 'package:on_boarding/game/gamelevels/fruits/medium/medium_qn.dart';
+import 'package:on_boarding/home/start-up/onboarding_page.dart';
+import 'package:on_boarding/home/start-up/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

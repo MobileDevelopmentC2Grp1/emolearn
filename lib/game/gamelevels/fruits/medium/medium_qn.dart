@@ -46,7 +46,7 @@ List<MediumQuestion> getQuestions() {
       imageUrl: "assets/images/apple_medium.png",
       answersList: [
         Answer("A    Apple", true),
-        Answer("B    Pill", false),
+        Answer("B    Pill", false), 
         Answer("C    Pomegranate", false)
       ],
       correctAnswerText: "A    Apple"));

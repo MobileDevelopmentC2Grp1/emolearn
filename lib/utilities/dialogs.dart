@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:on_boarding/notification_switch.dart';
+import 'package:on_boarding/utilities/notification_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpDialogs {
-  Future<void> DialogBox(
+  Future<void> dialogBox(
           String message, String imageUrl, BuildContext context) async =>
       showDialog(
           context: context,
@@ -85,7 +85,7 @@ class HelpDialogs {
 }
 
 class WrongAnswerDialogs {
-  Future<void> DialogBox(
+  Future<void> dialogBox(
     String message,
     BuildContext context,
   ) async =>
@@ -145,7 +145,7 @@ class WrongAnswerDialogs {
 }
 
 class CorrectAnswerDialogs {
-  Future<void> DialogBox(String message, BuildContext context) async =>
+  Future<void> dialogBox(String message, BuildContext context) async =>
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -196,7 +196,7 @@ class CorrectAnswerDialogs {
 }
 
 class UnansweredDialogs {
-  Future<void> DialogBox(String message, BuildContext context) async =>
+  Future<void> dialogBox(String message, BuildContext context) async =>
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -257,9 +257,10 @@ class SettingsDialog {
     }
   }
 
-  Future<void> DialogBox(BuildContext context) async {
+  Future<void> dialogBox(BuildContext context) async {
     await Hive.openBox("settingsBox");
 
+    // ignore: use_build_context_synchronously
     return showDialog(
         context: context,
         builder: (BuildContext context) {

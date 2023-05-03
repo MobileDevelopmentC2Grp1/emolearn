@@ -50,7 +50,8 @@ class _WordGameState extends State<WordGame> {
 
   @override
   Widget build(BuildContext context) {
-    var _textController;
+    // ignore: no_leading_underscores_for_local_identifiers
+    TextEditingController? _textController;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

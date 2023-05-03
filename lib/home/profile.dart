@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:on_boarding/signup.dart';
-import 'package:on_boarding/start.dart';
+import 'package:on_boarding/auth/signup.dart';
+import 'package:on_boarding/home/start-up/start.dart';
 
 //Link to privacy policy
 final Uri _url = Uri.parse(
@@ -28,7 +29,6 @@ class _ProfileState extends State<Profile> {
           if (snapshot.hasError) {
             return Text('Error opening Hive box: ${snapshot.error}');
           } else {
-            var userscoreBox = snapshot.data!;
             return StreamBuilder<User?>(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {
@@ -158,7 +158,9 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
     try {
       await FirebaseAuth.instance.signOut();
     } on FirebaseAuthException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -190,7 +192,9 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
         return sampleBox.get('score');
       }
     } catch (e) {
-      print('Error getting score from sampleBox: $e');
+      if (kDebugMode) {
+        print('Error getting score from sampleBox: $e');
+      }
       return 0;
     }
   }
@@ -281,7 +285,6 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
                                     builder: (context) => const StartScreen()));
                           })),
                           child: Container(
-                              // width: MediaQuery.of(context).size.width,
                               decoration: const BoxDecoration(
                                   color: Color.fromRGBO(62, 20, 82, 1.0),
                                   borderRadius:

@@ -1,28 +1,28 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_boarding/main.dart';
-import 'dialogs.dart';
-import 'medium_qn.dart';
+import '../../../../utilities/dialogs.dart';
+import 'medium_veg_qn.dart';
 
-class MediumPage extends StatefulWidget {
-  const MediumPage({super.key});
+class MediumVegPage extends StatefulWidget {
+  const MediumVegPage({super.key});
 
   @override
-  State<MediumPage> createState() => _MediumPageState();
+  State<MediumVegPage> createState() => _MediumVegPageState();
 }
 
-class _MediumPageState extends State<MediumPage> {
+class _MediumVegPageState extends State<MediumVegPage> {
   final HelpDialogs mediumDialog = HelpDialogs();
   final WrongAnswerDialogs wrongAnswerDialog = WrongAnswerDialogs();
   final CorrectAnswerDialogs correctAnswerDialogs = CorrectAnswerDialogs();
   final UnansweredDialogs unansweredDialogs = UnansweredDialogs();
-
   List<MediumQuestion> questionList = getQuestions();
-
   int currentQuestionIndex = 0;
   int mediumscore = 0;
   Answer? selectedAnswer;
   int scoreIfCorrect = 0;
+
   int getStoredScore = 0;
 
   //Creating a variable to reference to the box
@@ -33,32 +33,32 @@ class _MediumPageState extends State<MediumPage> {
     super.initState();
     _openBox();
   }
+
   // set up and open a Hive box named "userscore"
   Future<void> _openBox() async {
     await Hive.initFlutter();
     sampleBox = await Hive.openBox('userscore');
   }
 
-  // close the Hive box 
+  // close the Hive box
   @override
   void dispose() {
     sampleBox.close();
     super.dispose();
   }
-
-// The updateScore method updates the user's score in a Hive box called userscore. 
-// 1. The method first checks if the userscore box is already open. 
+// The updateScore method updates the user's score in a Hive box called userscore.
+// 1. The method first checks if the userscore box is already open.
 // If not, it calls the _openBox() method to open it.
 
-// 2. If the box is empty, meaning there is no score stored in it yet, 
+// 2. If the box is empty, meaning there is no score stored in it yet,
 // the method puts the user's current score in the box using the key score.
 
-// 3. If the box already has a score stored in it, 
-// the method retrieves the stored score, 
+// 3. If the box already has a score stored in it,
+// the method retrieves the stored score,
 // adds the user's current score to it,
 // and puts the updated score back in the box.
 
-// 4. If any errors occur while updating the score, 
+// 4. If any errors occur while updating the score,
 // they are caught and printed to the console.
 
   Future<void> updateScore(int num) async {
@@ -76,98 +76,106 @@ class _MediumPageState extends State<MediumPage> {
       }
     } catch (e) {
       // Handle any errors that occur while updating the score
-      print('Error updating score: $e');
+      if (kDebugMode) {
+        print('Error updating score: $e');
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text("Emolearn",
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Color.fromARGB(255, 60, 5, 70),
-                )),
-            Row(
-              children: [
-                InkWell(
-                    onTap: () {
-                      mediumDialog.DialogBox(
-                          'MEDIUM - Choose the correct word that accurately matches the word formed by combining the emojis from the list below.',
-                          'assets/images/medium_help.png',
-                          context);
-                    },
-                    child: Ink.image(
-                      image: const AssetImage('assets/images/info_icon.png'),
-                      width: 38,
-                      height: 24,
-                    )),
-                const SizedBox(
-                  width: 8,
-                ),
-                // Cancel button
-                InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Ink.image(
-                      image: const AssetImage('assets/images/close_icon.png'),
-                      width: 42,
-                      height: 28,
-                    )),
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 24.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Emolearn",
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: Color.fromARGB(255, 60, 5, 70),
+                  )),
+              Row(
+                children: [
+                  InkWell(
+                      onTap: () {
+                        mediumDialog.dialogBox(
+                            'MEDIUM - Choose the correct word that accurately matches the word formed by combining the emojis from the list below.',
+                            'assets/images/medium_help.png',
+                            context);
+                      },
+                      child: Ink.image(
+                        image: const AssetImage('assets/images/info_icon.png'),
+                        width: 38,
+                        height: 24,
+                      )),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  // Cancel button
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Ink.image(
+                        image: const AssetImage('assets/images/close_icon.png'),
+                        width: 42,
+                        height: 28,
+                      )),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 24.0,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(24.0),
+              border:
+                  Border.all(color: const Color.fromRGBO(140, 214, 92, 1.0)),
             ),
-          ],
-        ),
-        const SizedBox(
-          height: 24.0,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(24.0),
-            border: Border.all(color: const Color.fromRGBO(140, 214, 92, 1.0)),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: Column(children: [
+                Text(
+                  "Question ${currentQuestionIndex + 1} of ${questionList.length.toString()}",
+                  style: const TextStyle(
+                      fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+                ),
+                Text(
+                  questionList[currentQuestionIndex].question,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                Image.asset(
+                  questionList[currentQuestionIndex].imageUrl,
+                  width: 250.0,
+                  height: 250.0,
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+              ]),
+            ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Column(children: [
-              Text(
-                "Question ${currentQuestionIndex + 1} of ${questionList.length.toString()}",
-                style: const TextStyle(
-                    fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
-              ),
-              Text(
-                questionList[currentQuestionIndex].question,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Image.asset(
-                questionList[currentQuestionIndex].imageUrl,
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-            ]),
+          const SizedBox(
+            height: 30.0,
           ),
-        ),
-        const SizedBox(
-          height: 20.0,
-        ),
-        _answerList(),
-        const SizedBox(
-          height: 20.0,
-        ),
-        _nextQuestion(),
-      ],
+          _answerList(),
+          const SizedBox(
+            height: 20.0,
+          ),
+          _nextQuestion(),
+        ],
+      ),
     );
   }
 
@@ -225,6 +233,8 @@ class _MediumPageState extends State<MediumPage> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(answer.answerText[0],
+                          // textAlign: TextAlign.center,
+                          // answer.answerText,
                           style: const TextStyle(
                             color: Color(0XFFFFFFFF),
                           )),
@@ -242,9 +252,9 @@ class _MediumPageState extends State<MediumPage> {
             )));
   }
 
-  // Function to determine whether to move to the next question 
-  //or to end the quiz deepending on whether the current
-  // question is the last one or not. 
+// Function to determine whether to move to the next question
+//or to end the quiz deepending on whether the current
+// question is the last one or not.
   _nextQuestion() {
     bool isLastQuestion = false;
     if (currentQuestionIndex == questionList.length - 1) {
@@ -266,10 +276,10 @@ class _MediumPageState extends State<MediumPage> {
               checkMediumQuestion();
               //display score
               await Future.delayed(const Duration(seconds: 3));
+              // ignore: use_build_context_synchronously
               showDialog(
                   context: context, builder: (_) => showMediumScoreDialog());
-
-              // Calling the updateScore method 
+              // Calling the updateScore method
               //to update the user's score in a Hive box
               updateScore(mediumscore);
             } else {
@@ -281,7 +291,7 @@ class _MediumPageState extends State<MediumPage> {
               });
             }
           } else {
-            unansweredDialogs.DialogBox('You can not skip a question', context);
+            unansweredDialogs.dialogBox('You can not skip a question', context);
           }
         },
         child: Text(
@@ -295,23 +305,22 @@ class _MediumPageState extends State<MediumPage> {
   }
 
   // Function that checks if the player got a question right,
-  // if so, informs the player that they were correct 
-  // else a user in informed that they were wrong 
+  // if so, informs the player that they were correct
+  // else a user in informed that they were wrong
   //and is shown what the right answer was supposed to be
-
 
   checkMediumQuestion() {
     if (scoreIfCorrect < mediumscore) {
-      correctAnswerDialogs.DialogBox('You are correct', context);
+      correctAnswerDialogs.dialogBox('You are correct', context);
     } else {
-      wrongAnswerDialog.DialogBox(
+      wrongAnswerDialog.dialogBox(
           'The answer is: ${questionList[currentQuestionIndex].correctAnswerText}',
           context);
     }
   }
 
-  // Custom dialog which shows the score 
-  // of the player in a quiz with buttons 
+  // Custom dialog which shows the score
+  // of the player in a quiz with buttons
   // to replay the game of go to the playground
 
   showMediumScoreDialog() {
@@ -349,53 +358,55 @@ class _MediumPageState extends State<MediumPage> {
             const SizedBox(
               height: 10.0,
             ),
-            Column(children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(220, 32),
-                  foregroundColor: Colors.white,
-                  shape: const StadiumBorder(),
-                  backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
+            Column(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(220, 32),
+                    foregroundColor: Colors.white,
+                    shape: const StadiumBorder(),
+                    backgroundColor: const Color.fromRGBO(140, 214, 92, 1.0),
+                  ),
+                  child: const Text("Restart Quiz",
+                      style: TextStyle(
+                        fontSize: 18,
+                      )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      currentQuestionIndex = 0;
+                      mediumscore = 0;
+                      selectedAnswer = null;
+                      scoreIfCorrect = 0;
+                    });
+                  },
                 ),
-                child: const Text("Restart Quiz",
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    currentQuestionIndex = 0;
-                    mediumscore = 0;
-                    selectedAnswer = null;
-                    scoreIfCorrect = 0;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(220, 32),
-                  foregroundColor: Colors.white,
-                  shape: const StadiumBorder(),
-                  backgroundColor: const Color.fromARGB(255, 60, 5, 70),
+                const SizedBox(
+                  height: 15.0,
                 ),
-                child: const Text("Playground",
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const MyHomePage())));
-                },
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-            ])
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(220, 32),
+                    foregroundColor: Colors.white,
+                    shape: const StadiumBorder(),
+                    backgroundColor: const Color.fromARGB(255, 60, 5, 70),
+                  ),
+                  child: const Text("Playground",
+                      style: TextStyle(
+                        fontSize: 18,
+                      )),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => const MyHomePage())));
+                  },
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+              ],
+            ),
           ]),
         ));
   }

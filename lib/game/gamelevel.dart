@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:on_boarding/easy_veg_page.dart';
-import 'package:on_boarding/hard_veg_page.dart';
-import 'package:on_boarding/medium_veg_page.dart';
-import 'medium_page.dart';
-import 'easy_page.dart';
-import 'hard_page.dart';
+import 'package:on_boarding/game/gamelevels/vegetables/easy/easy_veg_page.dart';
+import 'package:on_boarding/game/gamelevels/vegetables/hard/hard_veg_page.dart';
+import 'package:on_boarding/game/gamelevels/vegetables/medium/medium_veg_page.dart';
+import 'gamelevels/fruits/medium/medium_page.dart';
+import 'gamelevels/fruits/easy/easy_page.dart';
+import 'gamelevels/fruits/hard/hard_page.dart';
 
 class GameLevel extends StatelessWidget {
   const GameLevel({super.key, required this.level});

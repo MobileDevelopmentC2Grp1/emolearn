@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:on_boarding/main.dart';
-import 'package:on_boarding/start.dart';
-import 'authentication_errorhandling.dart';
-import 'login_button.dart';
+import 'package:on_boarding/home/start-up/start.dart';
+import '../utilities/authentication_errorhandling.dart';
+import '../utilities/login_button.dart';
 import 'signup.dart';
 
 class LoginPage extends StatefulWidget {
@@ -57,8 +57,7 @@ class _LogInState extends State<LogIn> {
         password: pwdController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      //print(e.message);
-      errorHandling.DialogBox(e.message.toString(), context);
+      errorHandling.dialogBox(e.message.toString(), context);
       emailController.clear();
       pwdController.clear();
     }

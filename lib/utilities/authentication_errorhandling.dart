@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ErrorHandling {
-  Future<void> DialogBox(String subtitle, BuildContext context) async =>
+  Future<void> dialogBox(String subtitle, BuildContext context) async =>
       showDialog(
           context: context,
           builder: (BuildContext context) {

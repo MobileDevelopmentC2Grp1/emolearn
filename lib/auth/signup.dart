@@ -2,11 +2,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:on_boarding/authentication_errorhandling.dart';
+import 'package:on_boarding/utilities/authentication_errorhandling.dart';
 import 'package:on_boarding/main.dart';
-import 'content_button.dart';
+import '../utilities/content_button.dart';
 import 'login.dart';
-import 'start.dart';
+import '../home/start-up/start.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -84,15 +84,14 @@ class _SignUpState extends State<SignUp> {
         User? user = result.user;
         user?.updateDisplayName(usernameController.text.trim());
       } on FirebaseAuthException catch (e) {
-        //print(e);
-        _errorHandling.DialogBox(e.message.toString(), context);
+        _errorHandling.dialogBox(e.message.toString(), context);
         emailController.clear();
         usernameController.clear();
         pwdController.clear();
         confirmPwdController.clear();
       }
     } else {
-      _errorHandling.DialogBox("Passwords don't match", context);
+      _errorHandling.dialogBox("Passwords don't match", context);
       emailController.clear();
       usernameController.clear();
       pwdController.clear();

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:on_boarding/onboarding_page.dart';
+import 'package:on_boarding/home/start-up/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 

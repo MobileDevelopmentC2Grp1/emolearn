@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'dialogs.dart';
+import '../../../../utilities/dialogs.dart';
 import 'hard_veg_qn.dart';
-import 'main.dart';
+import '../../../../main.dart';
 
 class HardVegPage extends StatefulWidget {
   const HardVegPage({super.key});
@@ -33,32 +34,33 @@ class _HardVegPageState extends State<HardVegPage> {
     super.initState();
     _openBox();
   }
+
   // set up and open a Hive box named "userscore"
   Future<void> _openBox() async {
     await Hive.initFlutter();
     sampleBox = await Hive.openBox('userscore');
   }
-  
-  // close the Hive box 
+
+  // close the Hive box
   @override
   void dispose() {
     sampleBox.close();
     super.dispose();
   }
 
-// The updateScore method updates the user's score in a Hive box called userscore. 
-// 1. The method first checks if the userscore box is already open. 
+// The updateScore method updates the user's score in a Hive box called userscore.
+// 1. The method first checks if the userscore box is already open.
 // If not, it calls the _openBox() method to open it.
 
-// 2. If the box is empty, meaning there is no score stored in it yet, 
+// 2. If the box is empty, meaning there is no score stored in it yet,
 // the method puts the user's current score in the box using the key score.
 
-// 3. If the box already has a score stored in it, 
-// the method retrieves the stored score, 
+// 3. If the box already has a score stored in it,
+// the method retrieves the stored score,
 // adds the user's current score to it,
 // and puts the updated score back in the box.
 
-// 4. If any errors occur while updating the score, 
+// 4. If any errors occur while updating the score,
 // they are caught and printed to the console.
   Future<void> updateScore(int num) async {
     try {
@@ -75,130 +77,136 @@ class _HardVegPageState extends State<HardVegPage> {
       }
     } catch (e) {
       // Handle any errors that occur while updating the score
-      print('Error updating score: $e');
+      if (kDebugMode) {
+        print('Error updating score: $e');
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text("Emolearn",
-              style: TextStyle(
-                fontSize: 28,
-                color: Color.fromARGB(255, 60, 5, 70),
-              )),
-          Row(
-            children: [
-              InkWell(
-                  onTap: () {
-                    hardDialog.DialogBox(
-                        'HARD - Write your answer accurately matches the word formed by combining the emojis.',
-                        'assets/images/hard_help.png',
-                        context);
-                  },
-                  child: Ink.image(
-                    image: const AssetImage('assets/images/info_icon.png'),
-                    width: 38,
-                    height: 24,
-                  )),
-              const SizedBox(
-                width: 8,
-              ),
-              // Cancel button
-              InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Ink.image(
-                    image: const AssetImage('assets/images/close_icon.png'),
-                    width: 42,
-                    height: 28,
-                  )),
-            ],
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 20.0,
-      ),
-      Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(24.0),
-          border: Border.all(color: const Color.fromRGBO(140, 214, 92, 1.0)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 0.0),
+      child: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Emolearn",
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Color.fromARGB(255, 60, 5, 70),
+                )),
+            Row(
+              children: [
+                InkWell(
+                    onTap: () {
+                      hardDialog.dialogBox(
+                          'HARD - Write your answer accurately matches the word formed by combining the emojis.',
+                          'assets/images/hard_help.png',
+                          context);
+                    },
+                    child: Ink.image(
+                      image: const AssetImage('assets/images/info_icon.png'),
+                      width: 38,
+                      height: 24,
+                    )),
+                const SizedBox(
+                  width: 8,
+                ),
+                // Cancel button
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Ink.image(
+                      image: const AssetImage('assets/images/close_icon.png'),
+                      width: 42,
+                      height: 28,
+                    )),
+              ],
+            ),
+          ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
-          child: Column(children: [
-            if (index <= hardList.length - 1)
+        const SizedBox(
+          height: 20.0,
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(24.0),
+            border: Border.all(color: const Color.fromRGBO(140, 214, 92, 1.0)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
+            child: Column(children: [
+              if (index <= hardList.length - 1)
+                Text(
+                  "Question ${index + 1} of ${hardList.length.toString()}",
+                  style: const TextStyle(
+                      fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
+                ),
               Text(
-                "Question ${index + 1} of ${hardList.length.toString()}",
+                hardList[index].question,
                 style: const TextStyle(
                     fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
               ),
-            Text(
-              hardList[index].question,
-              style: const TextStyle(
-                  fontSize: 24, color: Color.fromARGB(255, 60, 5, 70)),
-            ),
-            Image.asset(
-              hardList[index].imageUrl,
-              width: 250.0,
-              height: 250.0,
-            ),
-          ]),
-        ),
-      ),
-      const SizedBox(
-        height: 48.0,
-      ),
-      Form(
-        key: formKey,
-        child: Column(
-          children: [
-            // The user will type something here
-            TextFormField(
-              controller: _textController,
-              cursorColor: const Color(0XFF8CD65C),
-              // selectionWidthStyle: BoxWidthStyle.max,
-              decoration: InputDecoration(
-                hintStyle:
-                    const TextStyle(color: Color.fromARGB(255, 60, 5, 70)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 60, 5, 70))),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                labelText: 'Type answer here...',
-                labelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 60, 5, 70), fontSize: 20.0),
-                fillColor: const Color(0xFFFFFFFF),
-                filled: true,
+              Image.asset(
+                hardList[index].imageUrl,
+                width: 250.0,
+                height: 250.0,
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please fill this field';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(
-              height: 48.0,
-            ),
-            hardNextQuestion(),
-          ],
+            ]),
+          ),
         ),
-      )
-    ]);
+        const SizedBox(
+          height: 48.0,
+        ),
+        Form(
+          key: formKey,
+          child: Column(
+            children: [
+              // The user will type something here
+              TextFormField(
+                controller: _textController,
+                cursorColor: const Color(0XFF8CD65C),
+                // selectionWidthStyle: BoxWidthStyle.max,
+                decoration: InputDecoration(
+                  hintStyle:
+                      const TextStyle(color: Color.fromARGB(255, 60, 5, 70)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 60, 5, 70))),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  labelText: 'Type answer here...',
+                  labelStyle: const TextStyle(
+                      color: Color.fromARGB(255, 60, 5, 70), fontSize: 20.0),
+                  fillColor: const Color(0xFFFFFFFF),
+                  filled: true,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please fill this field';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(
+                height: 48.0,
+              ),
+              hardNextQuestion(),
+            ],
+          ),
+        )
+      ]),
+    );
   }
-  // Function to determine whether to move to the next question 
+
+  // Function to determine whether to move to the next question
   //or to end the quiz deepending on whether the current
-  // question is the last one or not. 
+  // question is the last one or not.
   hardNextQuestion() {
     bool isLastHardQuestion = false;
     if (index == hardList.length - 1) {
@@ -226,9 +234,9 @@ class _HardVegPageState extends State<HardVegPage> {
 
             // ignore: use_build_context_synchronously
             showDialog(context: context, builder: (_) => showHardScoreDialog());
-            
-            // Calling the updateScore method 
-            //to update the user's score in a Hive box 
+
+            // Calling the updateScore method
+            //to update the user's score in a Hive box
             updateScore(hardScore);
           } else {
             //next question
@@ -247,23 +255,23 @@ class _HardVegPageState extends State<HardVegPage> {
     );
   }
   // Function that checks if the player got a question right,
-  // if so, informs the player that they were correct 
-  // else a user in informed that they were wrong 
+  // if so, informs the player that they were correct
+  // else a user in informed that they were wrong
   //and is shown what the right answer was supposed to be
 
   checkHardAnswer() {
     String answer = _textController.text.trim();
     if (answer.toLowerCase() == hardList[index].answer) {
       hardScore++;
-      correctAnswerDialogs.DialogBox('You are correct', context);
+      correctAnswerDialogs.dialogBox('You are correct', context);
     } else {
-      wrongAnswerDialog.DialogBox(
+      wrongAnswerDialog.dialogBox(
           'The correct answer is: ${hardList[index].answer}', context);
     }
   }
 
-  // Custom dialog which shows the score 
-  // of the player in a quiz with buttons 
+  // Custom dialog which shows the score
+  // of the player in a quiz with buttons
   // to replay the game of go to the playground
 
   showHardScoreDialog() {
