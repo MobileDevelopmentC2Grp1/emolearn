@@ -255,7 +255,7 @@ class _HardPageState extends State<HardPage> {
         title: Center(
           child: Column(children: [
             Image.asset(
-              "images/star_emoji.png",
+              "assets/images/star_emoji.png",
               height: 50,
               width: 50,
             ),
