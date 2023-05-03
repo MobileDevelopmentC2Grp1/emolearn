@@ -49,7 +49,10 @@ class _SignUpState extends State<SignUp> {
   final usernameController = TextEditingController();
   final pwdController = TextEditingController();
   final confirmPwdController = TextEditingController();
-
+  
+  // Overriding the dispose() method to dispose
+  // of all controllers when the widget
+  // is removed from the widget tree
   @override
   void dispose() {
     emailController.dispose();
@@ -60,6 +63,14 @@ class _SignUpState extends State<SignUp> {
   }
 
   // user sign in method
+  // Creating a new user using the email and password entered in the form. 
+  // If the creation is successful, the username is updated as the display name 
+  // of the user using the updateDisplayName() method. 
+  // If an exception occurs during the creation, 
+  // it shows an error message using the DialogBox() method of _errorHandling class
+  // and clears the form fields. 
+  // If the passwords don't match, 
+  // it shows an error message and clears the form fields.
   Future userSignIn() async {
     final validated = formKey.currentState!.validate();
     if (!validated) return;
@@ -89,7 +100,12 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
-  // Checking the password and the confirmd password are the same
+  // The confirmedPassword function checks if the password 
+  // entered by the user in the pwdController text field is 
+  // the same as the password entered in the confirmPwdController text field. 
+  // If the two passwords match, it returns true, indicating 
+  // that the passwords are confirmed. Otherwise, 
+  // it returns false, indicating that the passwords do not match.
   bool confirmedPassword() {
     if (pwdController.text.trim() == confirmPwdController.text.trim()) {
       return true;
@@ -224,6 +240,10 @@ class _SignUpState extends State<SignUp> {
                             fillColor: const Color(0xFFFFFFFF),
                             filled: true,
                           ),
+                        //The validator function takes an email as input.
+                        // checks if the email is empty and then returns the error message "Please enter an email".
+                        // checks if the email ids valid and then return "Please enter a valid email".
+                        // If both conditions are false, the function returns null to indicate that the email is valid.
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (email) {
                             if (email == null || email.isEmpty) {

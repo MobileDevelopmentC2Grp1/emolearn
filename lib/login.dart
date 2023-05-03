@@ -42,7 +42,10 @@ class _LogInState extends State<LogIn> {
   final formKey = GlobalKey<FormState>();
 
   String errorMessage = '';
-  // user log in method
+  //The userLogIn() function takes the user's email and password, then signs in the user
+  // using the signInWithEmailAndPassword method from Firebase Authentication. If the 
+  //email and password are correct, the user will be signed in, otherwise an error message will 
+  //be displayed using a custom DialogBox widget.
   Future userLogIn() async {
     final ErrorHandling errorHandling = ErrorHandling();
     final validated = formKey.currentState!.validate();
@@ -68,6 +71,9 @@ class _LogInState extends State<LogIn> {
   final emailController = TextEditingController();
   final pwdController = TextEditingController();
 
+   // Overriding the dispose() method to dispose
+  // of all controllers when the widget
+  // is removed from the widget tree
   @override
   void dispose() {
     emailController.dispose();
@@ -207,6 +213,10 @@ class _LogInState extends State<LogIn> {
                             filled: true,
                           ),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                        //The validator function takes an email as input.
+                        // checks if the email is empty and then returns the error message "Please enter an email".
+                        // checks if the email ids valid and then return "Please enter a valid email".
+                        // If both conditions are false, the function returns null to indicate that the email is valid.
                           validator: (email) {
                             if (email == null || email.isEmpty) {
                               return 'Please enter an email';
@@ -254,8 +264,10 @@ class _LogInState extends State<LogIn> {
                             fillColor: const Color(0xFFFFFFFF),
                             filled: true,
                           ),
-                          // autovalidateMode:
-                          //     AutovalidateMode.onUserInteraction,
+                        //The validator function takes a string value as input.
+                        // checks if the value is null or empty and then returns the error message "Please fill this field".
+                        // checks if the length of the value is less than 6 and then returns the error message "Password should be at least 6 characters long".
+                        // If both conditions are false, the function returns null to indicate that the value is valid.
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please fill this field';

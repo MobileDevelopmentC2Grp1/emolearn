@@ -1,9 +1,19 @@
+// class definitions for representing 
+//a medium difficulty quiz question and its answers.
 class MediumQuestion {
+  // String representing the question itself
   final String question;
+  // String representing the URL of an image 
+  //related to the question
   final String imageUrl;
+  // a List of Answer objects representing 
+  //the possible answers to the question
   final List<Answer> answersList;
+  // String representing the text of the correct answer to the question
   final String correctAnswerText;
 
+// constructor of class MediumQuestion
+// for initialization
   MediumQuestion(
       {required this.question,
       required this.imageUrl,
@@ -11,6 +21,8 @@ class MediumQuestion {
       required this.correctAnswerText});
 }
 
+// class definition representing an answer 
+//to a medium difficulty quiz in vegetable category
 class Answer {
   final String answerText;
   final bool isCorrect;
@@ -21,6 +33,7 @@ class Answer {
 List<MediumQuestion> getQuestions() {
   List<MediumQuestion> mediumList = [];
 
+// initializing questions and their possibe answers
   mediumList.add(MediumQuestion(
       question: "Choose the correct answer from the ones given below",
       imageUrl: "assets/images/eggplant_medium.png",

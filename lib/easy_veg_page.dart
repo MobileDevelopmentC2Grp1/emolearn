@@ -39,18 +39,32 @@ class _EasyVegPageState extends State<EasyVegPage> {
     generateWord();
     _openBox();
   }
-
+  // set up and open a Hive box named "userscore"
   Future<void> _openBox() async {
     await Hive.initFlutter();
     sampleBox = await Hive.openBox('userscore');
   }
 
+  // close the Hive box 
   @override
   void dispose() {
     sampleBox.close();
     super.dispose();
   }
+  // The updateScore method updates the user's score in a Hive box called userscore. 
+  // 1. The method first checks if the userscore box is already open. 
+  // If not, it calls the _openBox() method to open it.
 
+  // 2. If the box is empty, meaning there is no score stored in it yet, 
+  // the method puts the user's current score in the box using the key score.
+
+  // 3. If the box already has a score stored in it, 
+  // the method retrieves the stored score, 
+  // adds the user's current score to it,
+  // and puts the updated score back in the box.
+
+  // 4. If any errors occur while updating the score, 
+  // they are caught and printed to the console.
   Future<void> updateScore(int num) async {
     try {
       if (!Hive.isBoxOpen('userscore')) {
@@ -237,6 +251,8 @@ class _EasyVegPageState extends State<EasyVegPage> {
               // ignore: use_build_context_synchronously
               showDialog(
                   context: context, builder: (_) => showEasyScoreDialog());
+              // Calling the updateScore method 
+              //to update the user's score in a Hive box
               updateScore(easyVegScore);
             } else {
               //next question
@@ -257,6 +273,10 @@ class _EasyVegPageState extends State<EasyVegPage> {
           ),
         ));
   }
+  // Function that checks if the player got a question right,
+  // if so, informs the player that they were correct 
+  // else a user in informed that they were wrong 
+  //and is shown what the right answer was supposed to be
 
   checkEasyAnswer() {
     String userAnswer = easytextController.text.trim();
@@ -268,6 +288,10 @@ class _EasyVegPageState extends State<EasyVegPage> {
           'The correct answer is: $missingLetter', context);
     }
   }
+
+  // Custom dialog which shows the score 
+  // of the player in a quiz with buttons 
+  // to replay the game of go to the playground
 
   showEasyScoreDialog() {
     return AlertDialog(

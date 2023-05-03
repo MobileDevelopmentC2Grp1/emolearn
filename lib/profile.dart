@@ -81,7 +81,7 @@ class ProfileNoAccount extends StatelessWidget {
                         fontSize: 20.0,
                         color: Color.fromRGBO(62, 20, 82, 1.0))),
                 const SizedBox(
-                  height: 64.0,
+                  height: 48.0,
                 ),
                 TextButton(
                     onPressed: ((() {
@@ -176,6 +176,11 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
     super.dispose();
   }
 
+  // A function uses Hive to retrieve an integer value called "score"
+  // from a Hive box called "sampleBox". 
+  //If the box is empty, it returns 0 as the default value. 
+  //Otherwise, it retrieves the value stored in the "score" key
+  // and returns it as an integer.
   Future<int> displayScore() async {
     await Hive.openBox('userscore');
     try {
@@ -192,6 +197,10 @@ class _ProfileWithAccountState extends State<ProfileWithAccount> {
 
   @override
   Widget build(BuildContext context) {
+    // Creating a FutureBuilder widget whcih takes the displayScore() function 
+    // as its future argument and returns the score in the Text widget
+    // when the future completes. If the future has not yet completed, 
+    // a CircularProgressIndicator is displayed instead.
     return FutureBuilder<int>(
       future: displayScore(),
       builder: (context, snapshot) {
