@@ -14,10 +14,14 @@ An educational game for young children develop memory skills and enhance their a
 #### Score persistence
 - Users with accounts can save their progress.
 
-## Prerequisites to run the app
+## Prerequisites to run
 -	Internet
 -	Operating Systems: Windows 10 or later (64-bit), x86-64 based.
 -	IDE
+
+## Important links
+- <a href="https://docs.google.com/document/d/1x_NA2updE_FFWDJkH0Crj87b9VDsQ9iETy3pyApTY4Y/edit"> Documentation<a>
+
 
 ## Resources used:
 ### Firebase configuration
