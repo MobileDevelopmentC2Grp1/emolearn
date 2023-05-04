@@ -1,8 +1,17 @@
-# Emolearn Application 
+# Emolearn Application - Cohort 2: Group 1
 #### Emojis with a twist
 
 An educational game for young children develop memory skills and enhance their ability to plan, test, and solve problems, with visual aid.
 
+## Team members
+- Marie Ishimwe 
+- Natley Nyamukondiwa
+- Nicole Moyo
+
+## Important links
+- <a href="https://docs.google.com/document/d/1x_NA2updE_FFWDJkH0Crj87b9VDsQ9iETy3pyApTY4Y/edit"> Documentation<a>
+- <a href="https://www.figma.com/proto/asQa1OQZp9zdai1EklIlQd/Emolearn?node-id=178%3A495&scaling=scale-down&page-id=0%3A1&starting-point-node-id=178%3A495">Prototype</a>
+- <a href="https://drive.google.com/file/d/1zZh1dnrCuYkVnJkmdkpsrAMz_FWvrlWD/view?usp=share_link">Demo Video</a>
 
 ## Main features
 #### Authentication/Authorization
@@ -13,29 +22,48 @@ An educational game for young children develop memory skills and enhance their a
 - The game has different levels of difficulty namely easy, medium and hard.
 #### Score persistence
 - Users with accounts can save their progress.
+#### Reminders
+- Users can receive timely reminder to continue learning as they play.
 
 ## Prerequisites to run
 -	Internet
 -	Operating Systems: Windows 10 or later (64-bit), x86-64 based.
 -	IDE
-
-## Important links
-- <a href="https://docs.google.com/document/d/1x_NA2updE_FFWDJkH0Crj87b9VDsQ9iETy3pyApTY4Y/edit"> Documentation<a>
-- <a href="https://www.figma.com/proto/asQa1OQZp9zdai1EklIlQd/Emolearn?node-id=178%3A495&scaling=scale-down&page-id=0%3A1&starting-point-node-id=178%3A495">Prototype</a>
+-	Android Studio/VS Code 
+-	Android Emulator
 
 
-## Resources used:
-### Firebase configuration
+## Packages and plugins used:
 
-- [Firebase setup tutorial by HeyFlutter.com](https://www.youtube.com/watch?v=sz4slPFwEvs)
-- [Solution to error caused by not providing firebase options during initialization](https://stackoverflow.com/questions/70232931/firebaseoptions-cannot-be-null-when-creating-the-default-app)
-- [Installing flutterfire CLI to use to generate firebase options configuration file](https://firebase.flutter.dev/docs/cli/)
-- [Firebase Authentication tutorial by HeyFlutter.com](https://www.youtube.com/watch?v=4vKiJZNPhss)
-- [Firebase Authentication Documentation](https://firebase.google.com/docs/auth/flutter/start#:~:text=Add%20Firebase%20Authentication%20to%20your%20app%20From%20the,the%20plugin%20in%20your%20Dart%20code%3A%20import%20%27package%3Afirebase_auth%2Ffirebase_auth.dart%27%3B)
-- [Adding username to firebase user](https://stackoverflow.com/questions/63869474/how-can-i-add-the-displayname-to-the-firebase-user-flutter-dart)
+#### To optimise UI/UX
+- introduction_screen: ^3.1.4
+- percent_indicator: ^4.0.1
+- font_awesome_flutter: ^10.3.0
+- molten_navigationbar_flutter: ^1.0.0
+- url_launcher: ^6.1.10
+- flutter_switch: ^0.3.2
+  
+#### Data persistence
+- shared_preferences: ^2.0.17
+- hive: ^2.2.3
+- hive_flutter: ^1.1.0
+  
+#### Firebase
+- cloud_firestore: ^4.4.4
+- firebase_core: ^2.7.1
+- firebase_auth: ^4.2.10
 
-### Dynamic bottom navigation bar
-- [Molten navigation bar documentation](https://pub.dev/packages/molten_navigationbar_flutter/example)
+#### Security
+- email_validator: ^2.1.17
+- flutter_secure_storage: ^8.0.0
+- local_auth: ^2.1.6
+- secure_application: ^3.8.0
+  
+#### Notifications
+- fluttertoast: ^8.2.1
+- flutter_local_notifications: ^14.0.0
+- overlay_support: ^2.1.0
+  
+#### Optimize game logic
+- quiz: ^0.0.2
 
-### Overflowing widgets
-- [Using SingleChildScrollView widget to remove overflow error](https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html)
