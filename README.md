@@ -33,7 +33,7 @@ An educational game for young children develop memory skills and enhance their a
 -	Android Emulator
 
 
-## Packages and plugins used:
+## Flutter packages and plugins used:
 
 #### To optimise UI/UX
 - introduction_screen: ^3.1.4
