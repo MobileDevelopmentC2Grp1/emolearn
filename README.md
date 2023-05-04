@@ -21,6 +21,7 @@ An educational game for young children develop memory skills and enhance their a
 
 ## Important links
 - <a href="https://docs.google.com/document/d/1x_NA2updE_FFWDJkH0Crj87b9VDsQ9iETy3pyApTY4Y/edit"> Documentation<a>
+- <a href="https://www.figma.com/proto/asQa1OQZp9zdai1EklIlQd/Emolearn?node-id=178%3A495&scaling=scale-down&page-id=0%3A1&starting-point-node-id=178%3A495">Prototype</a>
 
 
 ## Resources used:
