@@ -1,7 +1,23 @@
 # Emolearn Application 
 #### Emojis with a twist
 
-An educational game for young children
+An educational game for young children develop memory skills and enhance their ability to plan, test, and solve problems, with visual aid.
+
+
+## Main features
+#### Authentication/Authorization
+- Even though a user can play the game without an account, there is an option to create accounts and those are used to authenticate and authorize users.
+#### Categories
+- It has different categories of objects, this version has two. These two are Fruits and Vegetables.
+#### Levels
+- The game has different levels of difficulty namely easy, medium and hard.
+#### Score persistence
+- Users with accounts can save their progress.
+
+## Prerequisites to run the app
+-	Internet
+-	Operating Systems: Windows 10 or later (64-bit), x86-64 based.
+-	IDE
 
 ## Resources used:
 ### Firebase configuration
